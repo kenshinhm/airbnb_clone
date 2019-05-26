@@ -1,4 +1,5 @@
 @import "colors";
+@import "sizes";
 
 @mixin boxBorder($radius) {
     border: 1px solid $light-grey;
@@ -11,4 +12,33 @@
 @mixin borderBottom($thick) {
     border-bottom: $thick+px solid #dcdce6;
     background-color: white;
+}
+
+@mixin warmRedButton($radius) {
+    background: $warm-red;
+    border-style: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px 22px;
+    font-size: $button-font-size;
+    margin: 10px 0;
+    border-radius: $radius+px;
+    
+    &:active {
+        opacity: 0.8;
+    }
+}
+
+@mixin plainInput() {
+    padding: 11px;
+    margin-bottom: 10px;
+    border: 1px solid $almost-white;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: $normal-font-size;
+    
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 1px $warm-green;
+    }
 }

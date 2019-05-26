@@ -90,31 +90,11 @@
             flex-direction: column;
             
             .input {
-                padding: 11px;
-                margin-bottom: 10px;
-                border: 1px solid $almost-white;
-                border-radius: 3px;
-                font-weight: 500;
-                font-size: $normal-font-size;
-                
-                &:focus {
-                    outline: none;
-                    box-shadow: 0 0 0 1px $warm-green;
-                }
+                @include plainInput();
             }
             
             .button {
-                background: $warm-red;
-                border-style: none;
-                color: white;
-                cursor: pointer;
-                padding: 10px 22px;
-                font-size: $button-font-size;
-                margin: 10px 0;
-                
-                &:active {
-                    opacity: 0.8;
-                }
+                @include warmRedButton(0);
             }
         }
         

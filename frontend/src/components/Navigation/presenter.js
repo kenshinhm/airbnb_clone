@@ -4,21 +4,22 @@ import {ReactComponent as Logo} from 'svg/logo.svg';
 import {ReactComponent as Search} from 'svg/search.svg';
 import PropTypes from "prop-types";
 import Login from "components/Login";
+import Reservation from "components/Reservation";
 
 const PublicLink = (props) => {
     return (
         <div className={styles.columnLink}>
             <button>
-                <div className={styles.link}>Become a host</div>
+                <div className={styles.link}>호스팅</div>
             </button>
             <button>
-                <div className={styles.link}>Help</div>
+                <div className={styles.link}>도움말</div>
             </button>
             <button>
-                <div className={styles.link}>Sign up</div>
+                <div className={styles.link}>회원 가입</div>
             </button>
             <button onClick={props.openLogin}>
-                <div className={styles.link}>Log in</div>
+                <div className={styles.link}>로그인</div>
             </button>
         </div>
     );
@@ -28,13 +29,13 @@ const PrivateLink = (props) => {
     return (
         <div className={styles.columnLink}>
             <button>
-                <div className={styles.link}>Become a host</div>
+                <div className={styles.link}>호스팅</div>
             </button>
             <button>
-                <div className={styles.link}>Help</div>
+                <div className={styles.link}>도움말</div>
             </button>
             <button onClick={props.dispatchLogout}>
-                <div className={styles.link}>Logout</div>
+                <div className={styles.link}>로그아웃</div>
             </button>
         </div>
     );
@@ -59,6 +60,7 @@ const Navigation = (props) => (
             {props.onLogin && <Login closeLogin={props.closeLogin}/>}
         </div>
         <div className={styles.image}>
+            <Reservation/>
             <span className={styles.text}>
                 웨스트 레이크 힐스테이트
                 <br/>미국 텍사스 오스틴
