@@ -41,21 +41,29 @@ const PrivateLink = (props) => {
 };
 
 const Navigation = (props) => (
-    <div className={styles.navigation}>
-        <div className={styles.columnLogo}>
-            <Logo className={styles.logo}/>
-        </div>
-        <div className={styles.columnSearch}>
-            <div className={styles.searchBox}>
-                <div className={styles.searchInner}>
-                    <Search/>
-                    <input className={styles.searchInput}
-                           placeholder={`Try "Seoul"`}/>
+    <div className={styles.container}>
+        <div className={styles.navigation}>
+            <div className={styles.columnLogo}>
+                <Logo className={styles.logo}/>
+            </div>
+            <div className={styles.columnSearch}>
+                <div className={styles.searchBox}>
+                    <div className={styles.searchInner}>
+                        <Search/>
+                        <input className={styles.searchInput}
+                               placeholder={`Try "Seoul"`}/>
+                    </div>
                 </div>
             </div>
+            {props.isLoggedIn ? <PrivateLink {...props}/> : <PublicLink {...props}/>}
+            {props.onLogin && <Login closeLogin={props.closeLogin}/>}
         </div>
-        {props.isLoggedIn ? <PrivateLink {...props}/> : <PublicLink {...props}/>}
-        {props.onLogin && <Login closeLogin={props.closeLogin}/>}
+        <div className={styles.image}>
+            <span className={styles.text}>
+                웨스트 레이크 힐스테이트
+                <br/>미국 텍사스 오스틴
+            </span>
+        </div>
     </div>
 );
 
