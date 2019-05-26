@@ -1,0 +1,14 @@
+@import "colors";
+
+@mixin boxBorder($radius) {
+    border: 1px solid $light-grey;
+    background-color: white;
+    @if $radius == yes {
+        border-radius: 3px;
+    }
+}
+
+@mixin borderBottom($thick) {
+    border-bottom: $thick+px solid #dcdce6;
+    background-color: white;
+}

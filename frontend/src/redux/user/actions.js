@@ -1,0 +1,41 @@
+import axios from "axios";
+import {LOGIN, LOGOUT} from "redux/user/actionTypes.js";
+
+//actions
+function login(token) {
+    return {
+        type: LOGIN,
+        token: token
+    };
+}
+
+function logout() {
+    return {
+        type: LOGOUT
+    };
+}
+
+export function dispatchLogin(email, password) {
+    return dispatch => {
+        axios.post(`${process.env.REACT_APP_API_URL}rest-auth/login/`, {
+                email,
+                password,
+            })
+            .then(response => {
+                if (response.status === 200 && response.data.key) {
+                    const token = response.data.key;
+                    dispatch(login(token));
+                } else {
+                    console.log(`${response.status}: ${response.statusText}`);
+                }
+            })
+            .catch(err => console.log(err));
+    };
+}
+
+export function dispatchLogout() {
+    return dispatch => {
+        dispatch(logout());
+    };
+}
+

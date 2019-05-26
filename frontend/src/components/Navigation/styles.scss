@@ -1,0 +1,77 @@
+@import "src/config/variables";
+
+.navigation {
+    width: 100%;
+    height: $navigation-height;
+    @include borderBottom(0.1);
+    display: flex;
+    justify-content: space-between;
+    
+    .column-logo {
+        width: 82px;
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        
+        .logo {
+            fill: #FF5A5F;
+            height: 34px;
+            width: 34px;
+            cursor: pointer;
+        }
+    }
+    
+    .column-search {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        
+        .search-box {
+            height: 48px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(26, 26, 29, 0.08) !important;
+            
+            .search-inner {
+                display: flex;
+                flex-direction: row;
+                padding: 12px;
+                
+                .search-input {
+                    margin-left: 10px;
+                    border-style: none;
+                    height: 22px;
+                    font-size: $search-font-size;
+                    width: 460px;
+                    
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+            
+        }
+    }
+    
+    .column-link {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: center;
+        
+        button {
+            background: transparent;
+            border-style: none;
+            padding: 0 8px;
+            
+            .link {
+                padding: 8px;
+                font-size: $normal-font-size;
+                text-align: center;
+                color: rgb(72, 72, 72);
+                font-weight: 600;
+                line-height: 1;
+            }
+        }
+    }
+}
