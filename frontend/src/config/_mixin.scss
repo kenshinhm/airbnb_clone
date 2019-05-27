@@ -31,6 +31,7 @@
 
 @mixin plainInput() {
     padding: 11px;
+    height: 40px;
     margin-bottom: 10px;
     border: 1px solid $almost-white;
     border-radius: 3px;

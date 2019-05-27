@@ -33,8 +33,16 @@ class Container extends React.Component {
         const infantNumber = this.state.countInfant;
         let stringGuests = guestNumber ? `게스트 ${guestNumber}명` : ``;
         if (infantNumber) {
-            stringGuests += `, 유아 ${infantNumber}명`;
+            if (stringGuests) {
+                stringGuests += `, 유아 ${infantNumber}명`;
+            } else {
+                stringGuests += `유아 ${infantNumber}명`;
+            }
         }
+        if (!stringGuests) {
+            stringGuests = '인원';
+        }
+
         this.setState({
             ...this.state,
             stringGuests

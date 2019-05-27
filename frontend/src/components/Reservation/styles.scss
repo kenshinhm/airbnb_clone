@@ -94,6 +94,8 @@
             align-items: center;
             
             .placeholder {
+                position: relative;
+                top: -2px;
                 font-size: $normal-font-size;
                 color: $medium-grey;
             }

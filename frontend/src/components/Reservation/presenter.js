@@ -108,8 +108,7 @@ const Reservation = props => {
                     <button className={styles.dropButton}
                             placeholder='인원' onClick={props.onClickGuest}>
                         <span className={styles.placeholder}>{props.stringGuests}</span>
-                        {props.guestClicked ? <Arrowup className={styles.arrow}/> :
-                            <ArrowDown/>}
+                        {props.guestClicked ? <Arrowup/> : <ArrowDown/>}
                     </button>
                     {props.guestClicked ?
                         <GuestModal countAdult={props.countAdult}
