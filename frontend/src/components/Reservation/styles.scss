@@ -7,16 +7,8 @@
     width: 120px;
     
     .count-button {
-        cursor: pointer;
-        text-align: center;
-        line-height: 1px;
+        @include roundButton();
         border: 1px solid rgb(0, 132, 137);
-        border-radius: 50%;
-        background: transparent;
-        width: 32px;
-        height: 32px;
-        display: flex;
-        justify-content: center;
     }
 }
 

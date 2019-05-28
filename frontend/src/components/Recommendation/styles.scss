@@ -1,0 +1,79 @@
+@import "src/config/variables";
+
+.header {
+    color: $dark-grey;
+    font-size: $large-font-size;
+    font-weight: 800;
+    margin: 20px 0;
+}
+
+.container {
+    position: relative;
+    
+    .list-container {
+        width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        
+        ul {
+            transition: all 0.5s ease-in-out;
+            
+            li {
+                cursor: pointer;
+                display: inline-block;
+                
+                img {
+                    width: 100%;
+                    border-radius: 10px;
+                    object-fit: cover;
+                }
+            }
+        }
+    }
+    
+    .arrow-left {
+        @include roundButton();
+        padding: 1px 6px;
+        border: 2px solid transparent;
+        box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 1px 1px !important;
+        background: white;
+        position: absolute;
+        top: calc(50% - 20px);
+        left: -20px;
+        z-index: 10;
+        transition: all 0.5s ease-in-out;
+    }
+    
+    .arrow-right {
+        @include roundButton();
+        padding: 1px 6px;
+        border: 2px solid transparent;
+        box-shadow: rgba(0, 0, 0, 0.14) 0px 1px 1px 1px !important;
+        background: white;
+        position: absolute;
+        top: calc(50% - 20px);
+        right: 0;
+        z-index: 10;
+    }
+}
+
+.desktop {
+    margin-right: 15px;
+    width: calc(20% - 15px);
+}
+
+.laptop {
+    margin-right: 15px;
+    width: calc(33.4% - 15px);
+}
+
+.tablet {
+    margin-right: 15px;
+    width: calc(50.0% - 15px);
+}
+
+.phone {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: calc(100% - 20px);
+}
