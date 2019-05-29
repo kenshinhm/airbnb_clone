@@ -3,6 +3,7 @@ import styles from './styles.scss';
 import Navigation from "components/Navigation";
 import Recommendation from "components/Recommendation";
 import Rooms from "components/Rooms";
+import {Loading} from "components/Loading/loading.js";
 
 class App extends React.Component {
 
@@ -19,6 +20,7 @@ class App extends React.Component {
                     </div>
                 </div>
                 <div className={styles.footer}>
+                    <Loading></Loading>
                 </div>
             </div>
         );
