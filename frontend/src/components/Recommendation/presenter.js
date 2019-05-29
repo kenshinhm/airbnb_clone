@@ -35,9 +35,9 @@ const Recommendation = props => {
     const {cardStyle, cardNum} = _getCardStyle(props.device);
 
     return (
-        <React.Fragment>
+        <div className={styles.container}>
             <header className={styles.header}>{props.title}</header>
-            <div className={styles.container}>
+            <div className={styles.cardContainer}>
                 <button className={styles.arrowLeft} onClick={props.slideLeft}
                         style={props.cityOffset === 0 ? {display: 'none'} : {}}>
                     <ArrowLeft/>
@@ -59,7 +59,7 @@ const Recommendation = props => {
                     <ArrowRight/>
                 </button>
             </div>
-        </React.Fragment>
+        </div>
     );
 };
 
