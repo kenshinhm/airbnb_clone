@@ -5,10 +5,16 @@ class Container extends React.Component {
 
     state = {
         guestClicked: false,
+
         stringGuests: "인원",
+
         countAdult: 0,
         countChildren: 0,
         countInfant: 0,
+
+        startDate: null,
+        endDate: null,
+        focusedInput: null,
     };
 
     render() {
@@ -16,7 +22,9 @@ class Container extends React.Component {
             <Reservation {...this.props}
                          {...this.state}
                          onClickGuest={this._onClickGuest}
-                         updateCount={this._updateCount}/>
+                         updateCount={this._updateCount}
+                         onDatesChange={this._onDatesChange}
+                         onFocusChange={this._onFocusChange}/>
         );
     }
 
@@ -26,6 +34,17 @@ class Container extends React.Component {
             ...this.state,
             guestClicked: !this.state.guestClicked,
         });
+    };
+
+    _onDatesChange = ({startDate, endDate}) => {
+        this.setState({
+            startDate,
+            endDate
+        });
+    };
+
+    _onFocusChange = focusedInput => {
+        this.setState({focusedInput});
     };
 
     _updateStringGuests = () => {

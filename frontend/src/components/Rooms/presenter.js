@@ -80,7 +80,7 @@ const Rooms = props => {
 
 
 Rooms.propTypes = {
-    isLoggedIn: PropTypes.bool.isRequired
+    title: PropTypes.string.isRequired,
 };
 
 export default Rooms;

@@ -1,10 +1,14 @@
 import React from 'react';
-import styles from './styles.scss';
 import {ReactComponent as ArrowDown} from 'svg/arrowDown.svg';
 import {ReactComponent as Arrowup} from 'svg/arrowUp.svg';
 import {ReactComponent as Minus} from 'svg/minus.svg';
 import {ReactComponent as Plus} from 'svg/plus.svg';
 import * as PropTypes from "prop-types";
+import {DateRangePicker,} from "react-dates";
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import 'components/Reservation/_datepicker.css';
+import styles from './styles.scss';
 
 class Count extends React.Component {
 
@@ -93,15 +97,19 @@ const Reservation = props => {
                     <input className={styles.formInput}
                            placeholder='모든 위치'/>
                 </div>
-                <div className={styles.formRow}>
-                    <label className={styles.formLabel}>체크인</label>
-                    <input className={styles.formInput}
-                           placeholder='년/월/일'/>
-                </div>
-                <div className={styles.formRow}>
-                    <label className={styles.formLabel}>체크아웃</label>
-                    <input className={styles.formInput}
-                           placeholder='년/월/일'/>
+                <div className={styles.formRow} style={{position: 'relative'}}>
+                    <label className={styles.formLabel}>체크인 / 체크아웃</label>
+                    <DateRangePicker
+                        startDatePlaceholderText={"월/일/년"}
+                        endDatePlaceholderText={"월/일/년"}
+                        startDate={props.startDate}
+                        startDateId="your_unique_start_date_id"
+                        endDate={props.endDate}
+                        endDateId="your_unique_end_date_id"
+                        onDatesChange={props.onDatesChange}
+                        focusedInput={props.focusedInput}
+                        onFocusChange={props.onFocusChange}
+                    />
                 </div>
                 <div className={styles.formRow}>
                     <label className={styles.formLabel}>인원</label>
@@ -111,12 +119,12 @@ const Reservation = props => {
                         {props.guestClicked ? <Arrowup/> : <ArrowDown/>}
                     </button>
                     {props.guestClicked ?
-                        <GuestModal countAdult={props.countAdult}
-                                    countChildren={props.countChildren}
-                                    countInfant={props.countInfant}
-                                    updateCount={props.updateCount}
-                                    onClickGuest={props.onClickGuest}/>
-                        : null}
+                     <GuestModal countAdult={props.countAdult}
+                                 countChildren={props.countChildren}
+                                 countInfant={props.countInfant}
+                                 updateCount={props.updateCount}
+                                 onClickGuest={props.onClickGuest}/>
+                                        : null}
                 </div>
                 <div className={styles.formRow}>
                     <input className={styles.submitButton}
@@ -130,13 +138,18 @@ const Reservation = props => {
 };
 
 Reservation.propTypes = {
-    stringGuests: PropTypes.string.isRequired,
     guestClicked: PropTypes.bool.isRequired,
+
+    stringGuests: PropTypes.string.isRequired,
+
     countAdult: PropTypes.number.isRequired,
     countChildren: PropTypes.number.isRequired,
     countInfant: PropTypes.number.isRequired,
+
     onClickGuest: PropTypes.func.isRequired,
     updateCount: PropTypes.func.isRequired,
+    onDatesChange: PropTypes.func.isRequired,
+    onFocusChange: PropTypes.func.isRequired,
 };
 
 export default Reservation;
