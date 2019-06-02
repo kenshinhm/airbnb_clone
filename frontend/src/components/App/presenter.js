@@ -4,12 +4,13 @@ import Navigation from "components/Navigation";
 import Recommendation from "components/Recommendation";
 import Rooms from "components/Rooms";
 import {ReactComponent as ArrowRight} from "svg/arrowRight.svg";
+import * as PropTypes from "prop-types";
 
-const RoomContainer = ({title, city}) => {
+const RoomContainer = ({title, city, dispatchLoading}) => {
     return (
         <div className={styles.roomContainer}>
             <header className={styles.header}>{title}</header>
-            <Rooms city={city} limit={8}/>
+            <Rooms city={city} limit={8} dispatchLoading={dispatchLoading}/>
             <footer className={styles.footer}>
                 모두 보기(2,000개 이상)
                 <span style={{marginLeft: `10px`}}>
@@ -22,6 +23,16 @@ const RoomContainer = ({title, city}) => {
 
 class App extends React.Component {
 
+    static propTypes = {
+        cityList: PropTypes.array,
+        renderCity: PropTypes.array,
+        dispatchLoading: PropTypes.func.isRequired,
+    };
+
+    componentDidMount() {
+        // console.log(this.props.cityList);
+    }
+
     render() {
         return (
             <div className={styles.app}>
@@ -30,8 +41,17 @@ class App extends React.Component {
                 </div>
                 <div className={styles.body}>
                     <div className={styles.bodyChild}>
-                        <Recommendation title='추천 여행지'/>
-                        <RoomContainer title={'서울의 숙소'} city={'서울'}/>
+                        <Recommendation title='추천 여행지'
+                                        cityList={this.props.cityList}/>
+                        {
+                            this.props.renderCity.map((city, index) => (
+                                <RoomContainer key={index}
+                                               title={`${city}의 숙소`}
+                                               city={city}
+                                               dispatchLoading={this.props.dispatchLoading}/>
+                            ))
+
+                        }
                     </div>
                 </div>
                 <div className={styles.footer}>

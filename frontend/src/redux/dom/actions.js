@@ -1,4 +1,4 @@
-import {RESIZE} from "redux/dom/actionTypes.js";
+import {RESIZE, LOADING} from "redux/dom/actionTypes.js";
 
 //actions
 export function dispatchResize(width) {
@@ -8,9 +8,10 @@ export function dispatchResize(width) {
     };
 }
 
-// export function dispatchResize(width) {
-//     return dispatch => {
-//         dispatch(resize(width));
-//     };
-// }
+export function dispatchLoading(status) {
+    return {
+        type: LOADING,
+        status
+    };
+}
 

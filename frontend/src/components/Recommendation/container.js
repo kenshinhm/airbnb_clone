@@ -8,24 +8,13 @@ class Container extends React.Component {
         title: PropTypes.string.isRequired,
         width: PropTypes.number.isRequired,
         device: PropTypes.string.isRequired,
+        cityList: PropTypes.array,
     };
+
     state = {
-        cityList: [],
         cityOffset: 0,
         translateX: 0,
     };
-
-    componentWillMount() {
-        this.state.cityList.push({name: "서울"});
-        this.state.cityList.push({name: "부산"});
-        this.state.cityList.push({name: "대전"});
-        this.state.cityList.push({name: "인천"});
-        this.state.cityList.push({name: "거제"});
-        this.state.cityList.push({name: "광주"});
-        this.state.cityList.push({name: "속초"});
-        this.state.cityList.push({name: "수원"});
-        this.state.cityList.push({name: "울산"});
-    }
 
     render() {
         return (

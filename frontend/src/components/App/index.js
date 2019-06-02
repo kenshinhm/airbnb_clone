@@ -1,12 +1,20 @@
 import Container from './container';
-import {dispatchResize} from "redux/dom/actions.js";
+import {dispatchResize, dispatchLoading} from "redux/dom/actions.js";
 import {connect} from 'react-redux';
 
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        dispatchResize: (width) => dispatch(dispatchResize(width))
+        dispatchResize: (width) => dispatch(dispatchResize(width)),
+        dispatchLoading: (status) => dispatch(dispatchLoading(status)),
     };
 };
 
-export default connect(null, mapDispatchToProps)(Container);
+const mapStateToProps = (state, ownProps) => {
+    const {dom: {loading}} = state;
+    return {
+        loading,
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

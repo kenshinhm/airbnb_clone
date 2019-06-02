@@ -7,6 +7,8 @@ class Container extends React.Component {
 
     static propTypes = {
         city: PropTypes.string.isRequired,
+        limit: PropTypes.number.isRequired,
+        dispatchLoading: PropTypes.func.isRequired,
     };
 
     state = {
@@ -23,9 +25,16 @@ class Container extends React.Component {
            .then(response => {
                if (response.status === 200) {
                    this.setState({
-                       rooms: [...response.data],
-                       loading: false
-                   });
+                                     rooms: [...response.data],
+                                     // loading: false
+                                 });
+                   setTimeout(() => {
+                       this.props.dispatchLoading(false);
+                       this.setState({
+                                         loading: false,
+                                     });
+
+                   }, 1000);
                } else {
                    console.log(`${response.status}: ${response.statusText}`);
                }

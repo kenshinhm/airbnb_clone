@@ -54,6 +54,7 @@ const _getCardStyle = (device) => {
 const Recommendation = props => {
 
     const {cardStyle, cardNum} = _getCardStyle(props.device);
+    console.log(props.cityList);
 
     return (
         <div className={styles.container}>
@@ -68,10 +69,10 @@ const Recommendation = props => {
                         {
                             props.cityList.map((city, index) => (
                                 <li key={index} className={cardStyle}>
-                                    <div style={{backgroundImage: `url(${cityList[city.name]})`}}
+                                    <div style={{backgroundImage: `url(${cityList[city]})`}}
                                          className={styles.img}>
                                         <div className={styles.text}>
-                                            <p>{city.name}</p>
+                                            <p>{city}</p>
                                         </div>
                                     </div>
                                 </li>
