@@ -4,6 +4,27 @@ import * as PropTypes from "prop-types";
 import {ReactComponent as ArrowLeft} from 'svg/arrowLeft.svg';
 import {ReactComponent as ArrowRight} from 'svg/arrowRight.svg';
 import classNames from 'classnames';
+import seoul from 'img/seoul.jpg';
+import busan from 'img/busan.jpg';
+import daejon from 'img/daejon.jpg';
+import incheon from 'img/incheon.jpg';
+import keoje from 'img/keoje.jpg';
+import kwangju from 'img/kwangju.jpg';
+import sokcho from 'img/sokcho.jpg';
+import suwon from 'img/suwon.jpg';
+import ulsan from 'img/ulsan.jpg';
+
+const cityList = {
+    서울: seoul,
+    부산: busan,
+    대전: daejon,
+    인천: incheon,
+    거제: keoje,
+    광주: kwangju,
+    속초: sokcho,
+    수원: suwon,
+    울산: ulsan,
+};
 
 const _getCardStyle = (device) => {
 
@@ -47,8 +68,12 @@ const Recommendation = props => {
                         {
                             props.cityList.map((city, index) => (
                                 <li key={index} className={cardStyle}>
-                                    <img src={require(`img/${city.name}.webp`)} alt={city.name}/>
-                                    {/*<div className={styles.img}/>*/}
+                                    <div style={{backgroundImage: `url(${cityList[city.name]})`}}
+                                         className={styles.img}>
+                                        <div className={styles.text}>
+                                            <p>{city.name}</p>
+                                        </div>
+                                    </div>
                                 </li>
                             ))
                         }

@@ -2,85 +2,62 @@
 
 .container {
     
-    .header {
-        color: $dark-grey;
-        font-size: $large-font-size;
-        font-weight: 800;
-        margin-top: 80px;
-        margin-bottom: 40px;
-    }
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    //position: relative;
     
-    .footer {
-        color: $warm-green;
-        font-weight: 600;
-        font-size: 17px;
-        line-height: 22px;
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        margin-top: 30px;
-    }
-    
-    .card-container {
+    .card {
+        margin-right: 30px;
+        margin-bottom: 10px;
+        width: calc(25% - 30px);
         
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        //position: relative;
-        
-        .card {
-            margin-right: 30px;
-            margin-bottom: 10px;
-            width: calc(25% - 30px);
-            
-            .img-container {
-                width: 100%;
-                padding-bottom: 70%;
-                background-position: center;
-                background-size: cover;
-                background-image: url("../../img/paris.webp");
-            }
-            
-            .location {
-                font-size: $small-font-size;
-                color: $medium-grey;
-                font-weight: 800;
-                line-height: 1.33em;
-                margin: 5px 0;
-            }
-            
-            .title {
-                font-size: 16px;
-                color: $dark-grey;
-                font-weight: 800;
-                line-height: 1.375em;
-                margin: 5px 0;
-            }
-            
-            .cost {
-                font-size: $normal-font-size;
-                color: $dark-grey;
-                font-weight: 400;
-                line-height: 1.285em;
-                margin: 5px 0;
-            }
-            
-            .rating {
-                color: $warm-green;
-                font-size: $small-font-size;
-                font-weight: 800;
-                line-height: 1.333em;
-                margin: 5px 0;
-                
-                .star {
-                    width: 12px;
-                    height: 12px;
-                    fill: $warm-green;
-                }
-            }
-            
-            
+        .img-container {
+            width: 100%;
+            padding-bottom: 70%;
+            background-position: center;
+            background-size: cover;
         }
         
+        .location {
+            font-size: $small-font-size;
+            color: $medium-grey;
+            font-weight: 800;
+            line-height: 1.33em;
+            margin: 5px 0;
+        }
+        
+        .title {
+            font-size: 16px;
+            color: $dark-grey;
+            font-weight: 800;
+            line-height: 1.375em;
+            margin: 5px 0;
+        }
+        
+        .cost {
+            font-size: $normal-font-size;
+            color: $dark-grey;
+            font-weight: 400;
+            line-height: 1.285em;
+            margin: 5px 0;
+        }
+        
+        .rating {
+            color: $warm-green;
+            font-size: $small-font-size;
+            font-weight: 800;
+            line-height: 1.333em;
+            margin: 5px 0;
+            
+            .star {
+                width: 12px;
+                height: 12px;
+                fill: $warm-green;
+            }
+        }
+        
+        
     }
+    
 }

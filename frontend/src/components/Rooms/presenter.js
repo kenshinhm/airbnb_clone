@@ -1,87 +1,62 @@
 import React from 'react';
-import PropTypes from "prop-types";
 import 'components/Rooms/styles.scss';
 import styles from "components/Rooms/styles.scss";
 import {ReactComponent as Star} from 'svg/star.svg';
-import {ReactComponent as ArrowRight} from 'svg/arrowRight.svg';
+import PropTypes from "prop-types";
+import withLoading from "components/Loading/loading.js";
+
+
+const RoomCard = props => {
+
+    const room = props.room;
+    const room_photo = room.room_photos[0].photo;
+
+    return (
+        <div className={styles.card}>
+            <div style={{backgroundImage: `url(${room_photo})`}}
+                 className={styles.imgContainer}/>
+            <p className={styles.location}>{room.location}</p>
+            <p className={styles.title}>{room.name}</p>
+            <p className={styles.cost}>1인당 ₩{room.price}</p>
+            <p className={styles.rating}><Star className={styles.star}/>{room.rating}</p>
+        </div>
+    );
+};
+
+RoomCard.propTypes = {
+    room: PropTypes.shape({
+        room_photos: PropTypes.arrayOf(
+            PropTypes.shape({
+                room: PropTypes.string.isRequired,
+                photo: PropTypes.string.isRequired,
+            })
+        ),
+        location: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        price: PropTypes.number.isRequired,
+        rating: PropTypes.number,
+    }).isRequired,
+};
 
 const Rooms = props => {
 
+    const rooms = props.rooms || [];
+
     return (
         <div className={styles.container}>
-            <header className={styles.header}>{props.title}</header>
-            <div className={styles.cardContainer}>
-                <div className={styles.card}>
-                    <div className={styles.imgContainer}/>
-                    <p className={styles.location}>수영구</p>
-                    <p className={styles.title}>[광교]재형이와 현지네 하우스</p>
-                    <p className={styles.cost}>1인당 ₩84,451</p>
-                    <p className={styles.rating}><Star className={styles.star}/>4.7</p>
-                </div>
-                <div className={styles.card}>
-                    <div className={styles.imgContainer}/>
-                    <p className={styles.location}>수영구</p>
-                    <p className={styles.title}>[광교]재형이와 현지네 하우스</p>
-                    <p className={styles.cost}>1인당 ₩84,451</p>
-                    <p className={styles.rating}><Star className={styles.star}/>4.7</p>
-                </div>
-                <div className={styles.card}>
-                    <div className={styles.imgContainer}/>
-                    <p className={styles.location}>수영구</p>
-                    <p className={styles.title}>[광교]재형이와 현지네 하우스</p>
-                    <p className={styles.cost}>1인당 ₩84,451</p>
-                    <p className={styles.rating}><Star className={styles.star}/>4.7</p>
-                </div>
-                <div className={styles.card}>
-                    <div className={styles.imgContainer}/>
-                    <p className={styles.location}>수영구</p>
-                    <p className={styles.title}>[광교]재형이와 현지네 하우스</p>
-                    <p className={styles.cost}>1인당 ₩84,451</p>
-                    <p className={styles.rating}><Star className={styles.star}/>4.7</p>
-                </div>
-                <div className={styles.card}>
-                    <div className={styles.imgContainer}/>
-                    <p className={styles.location}>수영구</p>
-                    <p className={styles.title}>[광교]재형이와 현지네 하우스</p>
-                    <p className={styles.cost}>1인당 ₩84,451</p>
-                    <p className={styles.rating}><Star className={styles.star}/>4.7</p>
-                </div>
-                <div className={styles.card}>
-                    <div className={styles.imgContainer}/>
-                    <p className={styles.location}>수영구</p>
-                    <p className={styles.title}>[광교]재형이와 현지네 하우스</p>
-                    <p className={styles.cost}>1인당 ₩84,451</p>
-                    <p className={styles.rating}><Star className={styles.star}/>4.7</p>
-                </div>
-                <div className={styles.card}>
-                    <div className={styles.imgContainer}/>
-                    <p className={styles.location}>수영구</p>
-                    <p className={styles.title}>[광교]재형이와 현지네 하우스</p>
-                    <p className={styles.cost}>1인당 ₩84,451</p>
-                    <p className={styles.rating}><Star className={styles.star}/>4.7</p>
-                </div>
-                <div className={styles.card}>
-                    <div className={styles.imgContainer}/>
-                    <p className={styles.location}>수영구</p>
-                    <p className={styles.title}>[광교]재형이와 현지네 하우스</p>
-                    <p className={styles.cost}>1인당 ₩84,451</p>
-                    <p className={styles.rating}><Star className={styles.star}/>4.7</p>
-                </div>
-            </div>
-            <footer className={styles.footer}>
-                모두 보기(2,000개 이상)
-                <span style={{marginLeft: `10px`}}>
-                    <ArrowRight/>
-                </span>
-            </footer>
+            {rooms.map(room => <RoomCard key={room.id} room={room}/>)}
         </div>
     );
 };
 
 
 Rooms.propTypes = {
-    title: PropTypes.string.isRequired,
+    rooms: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+        })
+    ).isRequired,
 };
 
-export default Rooms;
+export default withLoading(Rooms);
 

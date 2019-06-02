@@ -26,11 +26,28 @@
                     cursor: pointer;
                     display: inline-block;
                     
-                    img {
+                    .img {
                         width: 100%;
-                        border-radius: 10px;
-                        //object-fit: cover;
+                        padding-bottom: 100%;
+                        background-position: center;
+                        background-size: cover;
+                        position: relative;
+                        //background-image: url("../../img/seoul.jpg");
+                        
+                        .text {
+                            position: absolute;
+                            transform: translateX(-50%);
+                            left: 50%;
+                            top: 75%;
+                            
+                            p {
+                                color: $almost-white;
+                                font-size: $medium-font-size;
+                                font-weight: 700;
+                            }
+                        }
                     }
+                    
                 }
             }
         }

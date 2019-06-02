@@ -16,13 +16,15 @@ class Container extends React.Component {
     };
 
     componentWillMount() {
-        this.state.cityList.push({name: "barcelona", url: "../../img/barcelona.webp"});
-        this.state.cityList.push({name: "london", url: "../../img/london.webp"});
-        this.state.cityList.push({name: "newyork", url: "../../img/newyork.webp"});
-        this.state.cityList.push({name: "paris", url: "../../img/paris.webp"});
-        this.state.cityList.push({name: "roma", url: "../../img/roma.webp"});
-        this.state.cityList.push({name: "sanfrancisco", url: "../../img/sanfrancisco.webp"});
-        this.state.cityList.push({name: "tokyo", url: "../../img/tokyo.webp"});
+        this.state.cityList.push({name: "서울"});
+        this.state.cityList.push({name: "부산"});
+        this.state.cityList.push({name: "대전"});
+        this.state.cityList.push({name: "인천"});
+        this.state.cityList.push({name: "거제"});
+        this.state.cityList.push({name: "광주"});
+        this.state.cityList.push({name: "속초"});
+        this.state.cityList.push({name: "수원"});
+        this.state.cityList.push({name: "울산"});
     }
 
     render() {

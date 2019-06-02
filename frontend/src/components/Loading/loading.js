@@ -12,3 +12,17 @@ export const Loading = () => {
         </section>
     );
 };
+
+const withLoading = WrappedComponent => {
+
+    return (props => {
+        const {loading, ...rest} = props;
+        if (loading) {
+            return <Loading/>;
+        } else {
+            return <WrappedComponent {...rest}/>;
+        }
+    });
+};
+
+export default withLoading;
