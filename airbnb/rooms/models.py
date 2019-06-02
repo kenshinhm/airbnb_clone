@@ -18,11 +18,13 @@ class Room(TimestampModel):
     city = models.CharField(max_length=20)
     location = models.CharField(max_length=20, null=True)
 
+    # refactor
     capacity_cnt = models.IntegerField()
     bedroom_cnt = models.IntegerField()
     bathroom_cnt = models.IntegerField()
     bed_cnt = models.IntegerField()
 
+    # refactor
     detail_summary = models.TextField(blank=True)
     detail_space = models.TextField(blank=True)
     detail_guest_access = models.TextField(blank=True)
@@ -68,8 +70,6 @@ class RoomPhoto(TimestampModel):
     photo = models.ImageField(upload_to='room/')
 
     def __str__(self):
-        return self.room.city
-
-
+        return self.room.name
 
 

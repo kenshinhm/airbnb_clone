@@ -76,6 +76,7 @@ THIRD_PARTY_APPS = [
     'rest_auth',
     'rest_auth.registration',
     'corsheaders',
+    'django_filters',
 ]
 LOCAL_APPS = [
 # Your stuff: custom apps go here
@@ -271,6 +272,7 @@ SOCIALACCOUNT_ADAPTER = "airbnb.users.adapters.SocialAccountAdapter"
 # Your stuff...
 # ------------------------------------------------------------------------------
 REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
     'DEFAULT_PERMISSION_CLASSES': [

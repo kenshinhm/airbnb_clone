@@ -19,6 +19,7 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     # Your stuff: custom urls includes go here
+    path("rooms/", include("airbnb.rooms.urls", namespace="rooms")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
