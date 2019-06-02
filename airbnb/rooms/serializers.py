@@ -32,6 +32,7 @@ class RoomSerializer(serializers.ModelSerializer):
                   'city',
                   'location',
 
+                  'type',
                   'capacity_cnt',
                   'bedroom_cnt',
                   'bathroom_cnt',

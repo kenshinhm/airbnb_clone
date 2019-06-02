@@ -19,6 +19,7 @@ class Room(TimestampModel):
     location = models.CharField(max_length=20, null=True)
 
     # refactor
+    type = models.CharField(max_length=20, blank=True, null=True)
     capacity_cnt = models.IntegerField()
     bedroom_cnt = models.IntegerField()
     bathroom_cnt = models.IntegerField()
