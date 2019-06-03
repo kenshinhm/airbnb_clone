@@ -2,9 +2,8 @@ import React from 'react';
 import styles from './styles.scss';
 import {ReactComponent as Logo} from 'svg/logo.svg';
 import {ReactComponent as Search} from 'svg/search.svg';
-import PropTypes from "prop-types";
 import Login from "components/Login";
-import Reservation from "components/Reservation";
+import * as PropTypes from "prop-types";
 
 const PublicLink = (props) => {
     return (
@@ -58,13 +57,6 @@ const Navigation = (props) => (
             </div>
             {props.isLoggedIn ? <PrivateLink {...props}/> : <PublicLink {...props}/>}
             {props.onLogin && <Login closeLogin={props.closeLogin}/>}
-        </div>
-        <div className={styles.image}>
-            <Reservation/>
-            <span className={styles.text}>
-                웨스트 레이크 힐스테이트
-                <br/>미국 텍사스 오스틴
-            </span>
         </div>
     </div>
 );

@@ -1,61 +1,19 @@
 import React from 'react';
 import styles from './styles.scss';
 import Navigation from "components/Navigation";
-import Recommendation from "components/Recommendation";
-import Rooms from "components/Rooms";
-import {ReactComponent as ArrowRight} from "svg/arrowRight.svg";
-import * as PropTypes from "prop-types";
-
-const RoomContainer = ({title, city, dispatchLoading}) => {
-    return (
-        <div className={styles.roomContainer}>
-            <header className={styles.header}>{title}</header>
-            <Rooms city={city} limit={8} dispatchLoading={dispatchLoading}/>
-            <footer className={styles.footer}>
-                모두 보기(2,000개 이상)
-                <span style={{marginLeft: `10px`}}>
-                    <ArrowRight/>
-                </span>
-            </footer>
-        </div>
-    );
-};
+import Home from "components/Home";
+import {Route, Switch} from "react-router-dom";
 
 class App extends React.Component {
-
-    static propTypes = {
-        cityList: PropTypes.array,
-        renderCity: PropTypes.array,
-        dispatchLoading: PropTypes.func.isRequired,
-    };
-
-    componentDidMount() {
-        // console.log(this.props.cityList);
-    }
 
     render() {
         return (
             <div className={styles.app}>
-                <div className={styles.nav}>
-                    <Navigation/>
-                </div>
-                <div className={styles.body}>
-                    <div className={styles.bodyChild}>
-                        <Recommendation title='추천 여행지'
-                                        cityList={this.props.cityList}/>
-                        {
-                            this.props.renderCity.map((city, index) => (
-                                <RoomContainer key={index}
-                                               title={`${city}의 숙소`}
-                                               city={city}
-                                               dispatchLoading={this.props.dispatchLoading}/>
-                            ))
+                <Navigation/>
+                <Switch>
+                    <Route exact path='/' component={Home}/>
+                </Switch>
 
-                        }
-                    </div>
-                </div>
-                <div className={styles.footer}>
-                </div>
             </div>
         );
     }
