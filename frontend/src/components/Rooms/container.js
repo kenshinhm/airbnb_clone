@@ -25,14 +25,14 @@ class Container extends React.Component {
            .then(response => {
                if (response.status === 200) {
                    this.setState({
-                                     rooms: [...response.data],
-                                     // loading: false
-                                 });
+                       rooms: [...response.data],
+                       // loading: false
+                   });
                    setTimeout(() => {
                        this.props.dispatchLoading(false);
                        this.setState({
-                                         loading: false,
-                                     });
+                           loading: false,
+                       });
 
                    }, 1000);
                } else {

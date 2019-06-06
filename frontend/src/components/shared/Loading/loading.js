@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles.scss';
+import styles from 'components/shared/Loading/styles.scss';
 
 export const Loading = () => {
     return (

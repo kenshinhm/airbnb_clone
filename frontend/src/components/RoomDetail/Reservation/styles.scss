@@ -1,60 +1,20 @@
 @import "src/shared/variables";
 
-.count {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 120px;
-    
-    .count-button {
-        @include roundButton();
-        border: 1px solid rgb(0, 132, 137);
-    }
-}
-
-.guest-modal {
-    border-style: none;
-    background-color: white;
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    top: 350px;
-    width: 382px;
-    padding: 0 10px;
-    
-    .guest-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 40px;
-        margin: 5px 0;
-    }
-    
-    .guest-button {
-        background: transparent;
-        border-style: none;
-        cursor: pointer;
-        color: #239499;
-        margin-left: auto;
-        height: 40px;
-    }
-}
-
 .container {
     position: relative;
-    top: 80px;
-    left: 80px;
-    width: 440px;
+    top: 25px;
+    width: 350px;
     @include boxBorder(yes);
     display: flex;
     flex-direction: column;
     padding: 32px 32px 24px 24px;
     
     p {
-        font-size: 30px;
-        font-weight: 700;
+        font-size: 18px;
+        font-weight: 600;
         color: $dark-grey;
-        line-height: 36px;
+        line-height: 18px;
+        margin-bottom: 20px;
     }
     
     .form {
@@ -64,7 +24,7 @@
         .form-row {
             display: flex;
             flex-direction: column;
-            
+            position: relative;
         }
         
         .form-label {
@@ -99,5 +59,46 @@
             width: fit-content;
             margin-left: auto;
         }
+    }
+}
+
+.count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 120px;
+    
+    .count-button {
+        @include roundButton();
+        border: 1px solid rgb(0, 132, 137);
+    }
+}
+
+.guest-modal {
+    border-style: none;
+    background-color: white;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    top: 80px;
+    width: 300px;
+    padding: 0 10px;
+    
+    .guest-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        margin: 5px 0;
+    }
+    
+    .guest-button {
+        background: transparent;
+        border-style: none;
+        cursor: pointer;
+        color: #239499;
+        margin-left: auto;
+        height: 40px;
     }
 }

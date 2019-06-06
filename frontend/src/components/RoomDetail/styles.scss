@@ -1,0 +1,32 @@
+@import 'src/shared/variables';
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .photo-container {
+        width: 100%;
+        height: 600px;
+    }
+    
+    .body-container {
+        width: $max-page-width;
+        display: flex;
+        position: relative;
+        
+        .column1 {
+            width: 620px;
+            display: flex;
+            flex-direction: column;
+            
+        }
+        
+        .column2 {
+            position: relative;
+            margin-left: 50px;
+        }
+    }
+    
+}

@@ -30,6 +30,11 @@ class Container extends React.Component {
         window.addEventListener('scroll', this._scroll);
     }
 
+    componentWillUnmount() {
+        window.removeEventListener('resize', this._resize);
+        window.removeEventListener('scroll', this._scroll);
+    }
+
     _resize = () => {
         const width = window.outerWidth;
         this.props.dispatchResize(width);
@@ -55,7 +60,7 @@ class Container extends React.Component {
                 this.setState({renderCity});
 
                 nextCityIndex = Math.min(this.state.nextCityIndex + 1,
-                                         this.state.cityList.length);
+                    this.state.cityList.length);
                 this.setState({nextCityIndex});
             }
         }

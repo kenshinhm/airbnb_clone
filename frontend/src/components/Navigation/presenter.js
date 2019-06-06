@@ -4,6 +4,7 @@ import {ReactComponent as Logo} from 'svg/logo.svg';
 import {ReactComponent as Search} from 'svg/search.svg';
 import Login from "components/Login";
 import * as PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const PublicLink = (props) => {
     return (
@@ -44,7 +45,9 @@ const Navigation = (props) => (
     <div className={styles.container}>
         <div className={styles.navigation}>
             <div className={styles.columnLogo}>
-                <Logo className={styles.logo}/>
+                <Link to={'/'}>
+                    <Logo className={styles.logo}/>
+                </Link>
             </div>
             <div className={styles.columnSearch}>
                 <div className={styles.searchBox}>

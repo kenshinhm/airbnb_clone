@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles.scss';
+import styles from 'components/shared/Sample/styles.scss';
 
 const Sample = () => {
     return (

@@ -3,7 +3,8 @@ import 'components/Rooms/styles.scss';
 import styles from "components/Rooms/styles.scss";
 import {ReactComponent as Star} from 'svg/star.svg';
 import PropTypes from "prop-types";
-import withLoading from "components/Loading/loading.js";
+import withLoading from "components/shared/Loading/loading.js";
+import {Link} from "react-router-dom";
 
 
 const RoomCard = props => {
@@ -13,8 +14,10 @@ const RoomCard = props => {
 
     return (
         <div className={styles.card}>
-            <div style={{backgroundImage: `url(${room_photo})`}}
-                 className={styles.imgContainer}/>
+            <Link to={`room/${room.id}`}>
+                <div style={{backgroundImage: `url(${room_photo})`}}
+                     className={styles.imgContainer}/>
+            </Link>
             <p className={styles.location}>{room.location}</p>
             <p className={styles.title}>{room.name}</p>
             <p className={styles.cost}>1인당 ₩{room.price}</p>
@@ -44,7 +47,10 @@ const Rooms = props => {
 
     return (
         <div className={styles.container}>
-            {rooms.map(room => <RoomCard key={room.id} room={room}/>)}
+            {rooms.map(room => (
+                    <RoomCard key={room.id} room={room}/>
+                )
+            )}
         </div>
     );
 };
