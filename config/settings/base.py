@@ -101,9 +101,9 @@ AUTHENTICATION_BACKENDS = [
 # https://docs.djangoproject.com/en/dev/ref/settings/#auth-user-model
 AUTH_USER_MODEL = "users.User"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-redirect-url
-LOGIN_REDIRECT_URL = "users:redirect"
+# LOGIN_REDIRECT_URL = "users:redirect"
 # https://docs.djangoproject.com/en/dev/ref/settings/#login-url
-LOGIN_URL = "account_login"
+# LOGIN_URL = "account_login"
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
@@ -125,6 +125,8 @@ AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
 ]
 
+CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
+
 # MIDDLEWARE
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#middleware
@@ -133,11 +135,11 @@ MIDDLEWARE = [
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 # STATIC
@@ -224,33 +226,33 @@ EMAIL_BACKEND = env(
 # Django Admin URL.
 ADMIN_URL = "admin/"
 # https://docs.djangoproject.com/en/dev/ref/settings/#admins
-ADMINS = [("""Daniel Roy Greenfeld""", "daniel-roy-greenfeld@example.com")]
+ADMINS = [("""jaehyoung yoo""", "kenshinhm@naver.com")]
 # https://docs.djangoproject.com/en/dev/ref/settings/#managers
 MANAGERS = ADMINS
 
-# LOGGING
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#logging
-# See https://docs.djangoproject.com/en/dev/topics/logging for
-# more details on how to customize your logging configuration.
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "verbose": {
-            "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
-        }
-    },
-    "handlers": {
-        "console": {
-            "level": "DEBUG",
-            "class": "logging.StreamHandler",
-            "formatter": "verbose",
-        }
-    },
-    "root": {"level": "INFO", "handlers": ["console"]},
-}
+# # LOGGING
+# # ------------------------------------------------------------------------------
+# # https://docs.djangoproject.com/en/dev/ref/settings/#logging
+# # See https://docs.djangoproject.com/en/dev/topics/logging for
+# # more details on how to customize your logging configuration.
+# LOGGING = {
+#     "version": 1,
+#     "disable_existing_loggers": False,
+#     "formatters": {
+#         "verbose": {
+#             "format": "%(levelname)s %(asctime)s %(module)s "
+#             "%(process)d %(thread)d %(message)s"
+#         }
+#     },
+#     "handlers": {
+#         "console": {
+#             "level": "DEBUG",
+#             "class": "logging.StreamHandler",
+#             "formatter": "verbose",
+#         }
+#     },
+#     "root": {"level": "INFO", "handlers": ["console"]},
+# }
 
 
 # django-allauth
@@ -275,9 +277,9 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ('django_filters.rest_framework.DjangoFilterBackend',),
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-    ],
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.AllowAny'
+    # ],
     # 'DEFAULT_AUTHENTICATION_CLASSES': [
     #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
     #     # 'rest_framework.authentication.SessionAuthentication',
@@ -286,5 +288,7 @@ REST_FRAMEWORK = {
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+ACCOUNT_LOGOUT_ON_GET = True
 
 # REST_USE_JWT = True

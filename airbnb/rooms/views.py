@@ -1,8 +1,12 @@
+from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
 from rest_framework import generics
 from django_filters import rest_framework
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.response import Response
 
 from airbnb.rooms.serializers import RoomSerializer
-from.models import Room, RoomPhoto, Amenity
+from .models import Room, RoomPhoto, Amenity
 # from django.shortcuts import render
 
 
@@ -26,4 +30,18 @@ class Rooms(generics.ListAPIView):
     filter_backends = (rest_framework.DjangoFilterBackend,)
     filter_class = RoomsFilter
 
+
+class RoomDetail(APIView):
+
+    def get(self, request, room_id):
+
+        try:
+            room = Room.objects.get(pk=room_id)
+            # room = Room.objects.get(id=room_id)
+        except Room.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = RoomSerializer(room)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 

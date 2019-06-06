@@ -6,12 +6,9 @@ from airbnb.users.serializers import UserSerializer
 
 class RoomPhotoSerializer(serializers.ModelSerializer):
 
-    room = serializers.StringRelatedField(read_only=True)
-
     class Meta:
         model = RoomPhoto
         fields = (
-            'room',
             'photo',
         )
 
@@ -20,7 +17,7 @@ class RoomSerializer(serializers.ModelSerializer):
 
     # hostimages = HostImageSerializer(read_only=True)
     amenity = serializers.StringRelatedField(many=True, read_only=True)
-    room_photos = RoomPhotoSerializer(many=True, read_only=True)
+    room_photos = RoomPhotoSerializer(many=True)
     host = UserSerializer(read_only=True)
     # def get_room_photo(self, obj):
     #     return obj.room_photos.values_list('room_photos', flat=True)
