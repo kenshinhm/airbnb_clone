@@ -16,12 +16,19 @@ const Presenter = props => {
                             onUserReviewDelete={props.onUserReviewDelete}/>)}
             </div>
             {props.isLoggedIn ?
-                <div className={styles.reviewWriteContainer}>
+                <form className={styles.reviewWriteContainer}
+                      onSubmit={props.onUserReviewSubmit}>
+                    <div className={styles.row}>
+                        <label>평점</label>
+                        <input placeholder='5.0'
+                               onChange={props.onUserRatingChange}
+                               value={props.userRating}/>
+                    </div>
                     <textarea placeholder='소중한 후기를 남겨주세요'
                               value={props.userReview}
                               onChange={props.onUserReviewChange}/>
-                    <button onClick={props.onUserReviewSubmit}>쓰기</button>
-                </div>
+                    <input type='submit' value='쓰기'/>
+                </form>
                 :
                 null
             }
@@ -34,6 +41,7 @@ Presenter.propTypes = {
     onUserReviewChange: PropTypes.func,
     onUserReviewSubmit: PropTypes.func,
     onUserReviewDelete: PropTypes.func,
+    onUserRatingChange: PropTypes.func,
     reviews: PropTypes.array,
     reviewCount: PropTypes.number,
     userReview: PropTypes.string,

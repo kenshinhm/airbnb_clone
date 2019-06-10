@@ -25,7 +25,8 @@ class Reviews extends React.Component {
     };
 
     state = {
-        userReview: ''
+        userReview: '',
+        userRating: '',
     };
 
     render() {
@@ -35,7 +36,8 @@ class Reviews extends React.Component {
                        {...this.state}
                        onUserReviewChange={this._onUserReviewChange}
                        onUserReviewSubmit={this._onUserReviewSubmit}
-                       onUserReviewDelete={this._onUserReviewDelete}/>
+                       onUserReviewDelete={this._onUserReviewDelete}
+                       onUserRatingChange={this._onUserRatingChange}/>
         );
     }
 
@@ -48,12 +50,23 @@ class Reviews extends React.Component {
         });
     };
 
-    _onUserReviewSubmit = () => {
+    _onUserRatingChange = evt => {
 
+        const value = evt.target.value;
+
+        this.setState({
+            userRating: value,
+        });
+    };
+
+    _onUserReviewSubmit = (evt) => {
+
+        evt.preventDefault();
         const roomId = this.props.roomId;
 
         const data = JSON.stringify({
-            message: this.state.userReview
+            message: this.state.userReview,
+            rating: this.state.userRating,
         });
 
         api.post(`rooms/${roomId}/reviews/`, data)
