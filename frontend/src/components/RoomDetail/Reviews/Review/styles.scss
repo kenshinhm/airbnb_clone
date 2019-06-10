@@ -1,0 +1,54 @@
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    
+    .header {
+        display: flex;
+        align-items: center;
+        
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        
+        .info {
+            
+            .username {
+                color: rgb(72, 72, 72);
+                font-size: 16px;
+                line-height: 1.375em;
+                font-weight: 600;
+            }
+            
+            .time {
+                color: rgb(118, 118, 118);
+                font-size: 14px;
+                line-height: 1.28em;
+                font-weight: 400;
+            }
+            
+        }
+    }
+    
+    .message {
+        margin-top: 10px;
+        font-size: 14px;
+        font-weight: 400;
+        color: rgb(72, 72, 72);
+        line-height: 1.375em;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        
+        .close-button {
+            border-style: none;
+            background: transparent;
+            cursor: pointer;
+            outline: none;
+        }
+    }
+}

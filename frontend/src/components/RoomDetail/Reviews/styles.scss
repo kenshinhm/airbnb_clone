@@ -1,0 +1,45 @@
+@import "src/shared/variables";
+
+.container {
+    margin: 30px 0;
+    width: 100%;
+    
+    .title {
+        font-size: 24px;
+        font-weight: 800;
+        color: rgb(72, 72, 72);
+        line-height: 1.25em;
+    }
+    
+    .review-container {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0;
+    }
+    
+    .review-write-container {
+        display: flex;
+        flex-direction: column;
+        margin: 20px 0;
+        width: 100%;
+        
+        textarea {
+            height: 100px;
+            outline: none;
+            @include boxBorder(yes);
+            font-size: 14px;
+            font-weight: 400;
+            color: rgb(72, 72, 72);
+            line-height: 1.375em;
+            padding: 6px;
+        }
+        
+        button {
+            @include warmGreenButton(5);
+            width: fit-content;
+            margin-left: auto;
+            
+        }
+    }
+    
+}

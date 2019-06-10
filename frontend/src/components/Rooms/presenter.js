@@ -30,7 +30,6 @@ RoomCard.propTypes = {
     room: PropTypes.shape({
         room_photos: PropTypes.arrayOf(
             PropTypes.shape({
-                room: PropTypes.string.isRequired,
                 photo: PropTypes.string.isRequired,
             })
         ),

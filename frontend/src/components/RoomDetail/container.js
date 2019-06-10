@@ -12,15 +12,15 @@ class RoomDetail extends React.Component {
         sticky: false,
         startDate: null,
         endDate: null,
+        id: null,
     };
 
-    componentDidMount() {
+    _getApi = () => {
+        this.setState({
+            loading: true,
+        });
 
-        window.addEventListener('scroll', this._handleScroll);
-
-        const {match: {params: {id}}} = this.props;
-
-        api.get(`rooms/${id}/`)
+        api.get(`rooms/${this.state.id}/`)
            .then(response => {
                if (response.status === 200) {
                    this.setState({
@@ -32,7 +32,16 @@ class RoomDetail extends React.Component {
                }
            })
            .catch(err => console.log(err));
+    };
 
+    componentDidMount() {
+
+        window.addEventListener('scroll', this._handleScroll);
+
+        const {match: {params: {id}}} = this.props;
+        this.setState({
+            id,
+        }, () => this._getApi());
     }
 
     componentWillUnmount() {
@@ -44,7 +53,8 @@ class RoomDetail extends React.Component {
             <Presenter {...this.props}
                        {...this.state}
                        onClickInfo={this._onClickInfo}
-                       onDatesUpdate={this._onDatesUpdate}/>
+                       onDatesUpdate={this._onDatesUpdate}
+                       getApi={this._getApi}/>
         );
     }
 

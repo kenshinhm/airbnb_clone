@@ -5,14 +5,15 @@ const api = axios.create({
     // baseURL: 'https://backends.xyz/',
 });
 
-// api.interceptors.request.use(function(config) {
-//   const token = localStorage.getItem('token');
-//   if (token) {
-//     config.headers = config.headers || {};
-//     config.headers['Authorization'] = 'Bearer ' + token;
-//   }
-//   return config;
-// });
+api.interceptors.request.use(function (config) {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers = config.headers || {};
+        config.headers['Content-Type'] = "application/json";
+        config.headers['Authorization'] = 'JWT ' + token;
+    }
+    return config;
+});
 
 // api.interceptors.request.use(function(config) {
 //     config.headers = config.headers || {};

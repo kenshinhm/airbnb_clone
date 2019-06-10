@@ -54,6 +54,21 @@ $phone-width: 510px;
     }
 }
 
+@mixin warmGreenButton($radius) {
+    background: $warm-green;
+    border-style: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px 22px;
+    font-size: $button-font-size;
+    margin: 10px 0;
+    border-radius: $radius+px;
+    
+    &:active {
+        opacity: 0.8;
+    }
+}
+
 @mixin plainInput() {
     padding: 11px;
     height: 40px;

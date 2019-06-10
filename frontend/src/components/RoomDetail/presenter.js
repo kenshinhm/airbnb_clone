@@ -7,6 +7,7 @@ import Header from "./Header/presenter.js";
 import Description from "./Description/presenter.js";
 import Location from "./Location/presenter.js";
 import ReservationStatus from "./ReservationStatus/presenter.js";
+import Reviews from "./Reviews/container.js";
 
 
 const Presenter = props => {
@@ -33,6 +34,11 @@ const Presenter = props => {
                     <ReservationStatus onDatesUpdate={props.onDatesUpdate}
                                        startDate={props.startDate}
                                        endDate={props.endDate}/>
+                    <Reviews rating={room.rating}
+                             reviews={room.reviews}
+                             reviewCount={room.review_count}
+                             roomId={room.id}
+                             getApi={props.getApi}/>
                     <Location location_info={room.location_info}
                               lat={room.lat}
                               lng={room.lng}/>

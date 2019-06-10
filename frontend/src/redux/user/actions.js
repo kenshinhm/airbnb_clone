@@ -18,18 +18,18 @@ function logout() {
 export function dispatchLogin(email, password) {
     return dispatch => {
         axios.post(`${process.env.REACT_APP_API_URL}rest-auth/login/`, {
-                email,
-                password,
-            })
-            .then(response => {
-                if (response.status === 200 && response.data.key) {
-                    const token = response.data.key;
-                    dispatch(login(token));
-                } else {
-                    console.log(`${response.status}: ${response.statusText}`);
-                }
-            })
-            .catch(err => console.log(err));
+                 email,
+                 password,
+             })
+             .then(response => {
+                 if (response.status === 200 && response.data.token) {
+                     const token = response.data.token;
+                     dispatch(login(token));
+                 } else {
+                     console.log(`${response.status}: ${response.statusText}`);
+                 }
+             })
+             .catch(err => console.log(err));
     };
 }
 
