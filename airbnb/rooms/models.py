@@ -1,5 +1,6 @@
 from django.db import models
 from airbnb.users.models import User
+import numpy as np
 
 
 class TimestampModel(models.Model):
@@ -39,9 +40,6 @@ class Room(TimestampModel):
 
     # room_booking
 
-    # room_reviews
-    rating = models.FloatField(blank=True, null=True)
-
     # host
     # TODO: divide host user, guest user
     host = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -55,6 +53,13 @@ class Room(TimestampModel):
     @property
     def review_count(self):
         return self.reviews.all().count()
+
+    @property
+    def rating(self):
+        rating_query = self.reviews.all().values('rating')
+        rating_list = [query['rating'] for query in rating_query]
+
+        return '{rating:.1f}'.format(rating=np.mean(rating_list))
 
     def __str__(self):
         return self.name
@@ -73,6 +78,7 @@ class Review(TimestampModel):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='reviews')
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
     message = models.TextField()
+    rating = models.FloatField(default=5.0)
 
     def __str__(self):
         return '{}-{}'.format(self.creator, self.room)

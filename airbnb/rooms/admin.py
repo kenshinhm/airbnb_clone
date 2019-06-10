@@ -56,4 +56,5 @@ class ReviewAdmin(admin.ModelAdmin):
         'room',
         'creator',
         'message',
+        'rating',
     )

@@ -8,7 +8,7 @@ class ReviewSerializer(serializers.ModelSerializer):
 
     creator = UserSerializer(read_only=True)
     room = serializers.StringRelatedField()
-    is_own = serializers.SerializerMethodField()
+    is_own = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = Review
@@ -17,6 +17,7 @@ class ReviewSerializer(serializers.ModelSerializer):
             'creator',
             'message',
             'room',
+            'rating',
             'is_own'
         )
 
@@ -48,6 +49,7 @@ class RoomSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True)
     room_photos = RoomPhotoSerializer(many=True)
     host = UserSerializer(read_only=True)
+    rating = serializers.ReadOnlyField()
 
     class Meta:
         model = Room
