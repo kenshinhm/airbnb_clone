@@ -1,7 +1,34 @@
 from rest_framework import serializers
 
-from airbnb.rooms.models import Room, RoomPhoto
+from airbnb.rooms.models import Room, RoomPhoto, Review
 from airbnb.users.serializers import UserSerializer
+
+
+class ReviewSerializer(serializers.ModelSerializer):
+
+    creator = UserSerializer(read_only=True)
+    room = serializers.StringRelatedField()
+    is_own = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Review
+        fields = (
+            'id',
+            'creator',
+            'message',
+            'room',
+            'is_own'
+        )
+
+    def get_is_own(self, obj):
+        if 'request' in self.context:
+            request = self.context['request']
+            if request.user == obj.creator:
+                return True
+            else:
+                return False
+
+        return False
 
 
 class RoomPhotoSerializer(serializers.ModelSerializer):
@@ -16,11 +43,11 @@ class RoomPhotoSerializer(serializers.ModelSerializer):
 class RoomSerializer(serializers.ModelSerializer):
 
     # hostimages = HostImageSerializer(read_only=True)
-    amenity = serializers.StringRelatedField(many=True, read_only=True)
+    # amenity = serializers.StringRelatedField(many=True, read_only=True)
+    # reviews = serializers.ListField(read_only=True, child=ReviewSerializer())
+    reviews = ReviewSerializer(many=True)
     room_photos = RoomPhotoSerializer(many=True)
     host = UserSerializer(read_only=True)
-    # def get_room_photo(self, obj):
-    #     return obj.room_photos.values_list('room_photos', flat=True)
 
     class Meta:
         model = Room
@@ -51,7 +78,10 @@ class RoomSerializer(serializers.ModelSerializer):
                   'lng',
                   'location_info',
 
+                  'reviews',
+                  'review_count',
+
                   # relation
-                  'amenity',
+                  # 'amenity',
                   'room_photos',
                   )

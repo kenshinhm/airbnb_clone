@@ -35,7 +35,7 @@ class Room(TimestampModel):
     price = models.IntegerField()
 
     # room_amenity
-    amenity = models.ManyToManyField('Amenity', blank=True)
+    # amenity = models.ManyToManyField('Amenity', blank=True)
 
     # room_booking
 
@@ -44,13 +44,17 @@ class Room(TimestampModel):
 
     # host
     # TODO: divide host user, guest user
-    host = models.ForeignKey(User, on_delete=models.CASCADE, related_name='host')
+    host = models.ForeignKey(User, on_delete=models.CASCADE)
     is_super_host = models.BooleanField(blank=True)
 
     # room location
     lat = models.FloatField(blank=True, null=True)
     lng = models.FloatField(blank=True, null=True)
     location_info = models.CharField(max_length=100, blank=True)
+
+    @property
+    def review_count(self):
+        return self.reviews.all().count()
 
     def __str__(self):
         return self.name
@@ -62,6 +66,16 @@ class Amenity(models.Model):
 
     def __str__(self):
         return self.key
+
+
+class Review(TimestampModel):
+
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='reviews')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    message = models.TextField()
+
+    def __str__(self):
+        return '{}-{}'.format(self.creator, self.room)
 
 
 class RoomPhoto(TimestampModel):

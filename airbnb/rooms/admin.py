@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from airbnb.rooms.models import Room, RoomPhoto, Amenity
+from airbnb.rooms.models import Room, RoomPhoto, Amenity, Review
 
 
 @admin.register(Room)
@@ -46,4 +46,14 @@ class AmenityAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'key',
+    )
+
+
+@admin.register(Review)
+class ReviewAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'room',
+        'creator',
+        'message',
     )
