@@ -4,6 +4,18 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 import time
 from bs4 import BeautifulSoup
+import django
+import os
+import urllib.request
+from django.core.files.uploadedfile import SimpleUploadedFile
+import requests
+import imghdr
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
+django.setup()
+
+from airbnb.rooms.models import Room, RoomPhoto
+from airbnb.users.models import User
 
 room_urls = []
 
@@ -25,7 +37,14 @@ time.sleep(1)
 browser.set_window_size(1920, 1280)  # maximize_window(), minimize_window()
 
 # 페이지 이동
-browser.get(room_urls[120])
+url = room_urls[0]
+print(url)
+
+room_id_start_idx = url.find('rooms/') + len('rooms/')
+room_id_end_idx = url.find('?location')
+room_id = url[room_id_start_idx: room_id_end_idx]
+
+browser.get(url)
 browser.implicitly_wait(2)
 time.sleep(1)
 
@@ -42,93 +61,123 @@ soup = BeautifulSoup(browser.page_source, "html.parser")
 # print(soup.prettify())
 
 '''
+도시 설정
+'''
+db_city='서울특별시'
+
+'''
 이미지 가져오기
 '''
 time.sleep(1)
-db_room_image_urls = []
-room_images = soup.select_one("._167bw5o").select("img._uttz43")
-for room_image in room_images:
-    db_room_image_urls.append(room_image['src'])
 
-for idx, db_room_image_url in enumerate(db_room_image_urls):
-    print('{}번째 Image URL: {}'.format(idx,db_room_image_url))
+db_room_photo_urls = []
+room_photos = soup.select_one("._167bw5o").select("img._uttz43")
+for room_photo in room_photos:
+    db_room_photo_urls.append(room_photo['src'])
+
+for idx, db_room_photo in enumerate(db_room_photo_urls):
+    print('{}번째 Image URL: {}'.format(idx, db_room_photo))
 
 '''
 방 제목 가져오기
 '''
 time.sleep(1)
-room_title = soup.select_one("div#summary").select_one("span._18hrqvin").text
-room_location = soup.select_one("div#summary").select_one("div._1hpgssa1").select_one("div._czm8crp").text
+db_name = soup.select_one("div#summary").select_one("span._18hrqvin").text
+db_location = soup.select_one("div#summary").select_one("div._1hpgssa1").select_one("div._czm8crp").text
 print()
-print('title: {}'.format(room_title))
-print('location: {}'.format(room_location))
+print('title: {}'.format(db_name))
+print('location: {}'.format(db_location))
 
 '''  
 방 정보 가져오기
 '''
 time.sleep(1)
 
-db_room_type = soup.select_one("div#summary").next_sibling.select_one("div._hgs47m").select_one("div._1p3joamp").text
-print()
-print('room_type: {}'.format(db_room_type))
+db_capacity = 1
+db_bedroom = 1
+db_bed = 1
+db_bathroom = 1
 
-room_infos = soup.select_one("div#summary").next_sibling.select_one("div._hgs47m").select("div._czm8crp")
-db_capacity_cnt = room_infos[0].text[-2]
-db_bedroom_cnt = 1 if room_infos[1].text == '원룸' else room_infos[1].text[-2]
-db_bed_cnt = room_infos[2].text[-2]
-db_bathroom_cnt = room_infos[3].text[-2]
-print()
-print('capacity_cnt: {}'.format(db_capacity_cnt))
-print('bedroom_cnt: {}'.format(db_bedroom_cnt))
-print('bed_cnt: {}'.format(db_bed_cnt))
-print('bathroom_cnt: {}'.format(db_bathroom_cnt))
+try:
+    db_type = soup.select_one("div#summary").next_sibling.select_one("div._hgs47m").select_one("div._1p3joamp").text
+
+    room_infos = soup.select_one("div#summary").next_sibling.select_one("div._hgs47m").select("div._czm8crp")
+    db_capacity = room_infos[0].text[-2]
+    db_bedroom = 1 if room_infos[1].text == '원룸' else room_infos[1].text[-2]
+    db_bed = room_infos[2].text[-2]
+    db_bathroom = room_infos[3].text[-2]
+
+except Exception as err:
+    print()
+    print(err)
+
+finally:
+    print()
+    print('room_type: {}'.format(db_type))
+    print()
+    print('capacity_cnt: {}'.format(db_capacity))
+    print('bedroom_cnt: {}'.format(db_bedroom))
+    print('bed_cnt: {}'.format(db_bed))
+    print('bathroom_cnt: {}'.format(db_bathroom))
 
 '''  
 방 소개 가져오기
 '''
 time.sleep(1)
-room_summary = soup.select_one("div#details > div").contents[0]
-spans_root = room_summary.select('span._czm8crp')
-db_detail_summary = ''
-
-for span_root in spans_root:
-    spans = span_root.select('span')
-
-    for span in spans:
-        db_detail_summary += str(span.text)
-        db_detail_summary += '\n'
-
-    db_detail_summary += '\n'
-
-room_details = []
-room_detail_tag = soup.select_one("div#details > div").contents[1]
-room_detail_tag = room_detail_tag.select_one("div._kj7i925 > div")
-
-for content in room_detail_tag.contents:
-
-    title = content.select_one("div._1p3joamp").text
-    room_detail = str(title) + '\n\n'
-    spans_root = content.select('span._czm8crp')
+try:
+    room_summary = soup.select_one("div#details > div").contents[0]
+    spans_root = room_summary.select('span._czm8crp')
+    db_summary = ''
 
     for span_root in spans_root:
         spans = span_root.select('span')
 
         for span in spans:
-            room_detail += str(span.text)
+            db_summary += str(span.text)
+            db_summary += '\n'
+
+        db_summary += '\n'
+
+    db_summary = db_summary[:-2]
+
+    db_room_infos = ['', '', '', '']
+    room_detail_tag = soup.select_one("div#details > div").contents[1]
+    room_detail_tag = room_detail_tag.select_one("div._kj7i925 > div")
+
+    for i, content in enumerate(room_detail_tag.contents):
+
+        title = content.select_one("div._1p3joamp").text
+        room_detail = str(title) + '\n\n'
+        spans_root = content.select('span._czm8crp')
+
+        for span_root in spans_root:
+            spans = span_root.select('span')
+
+            for span in spans:
+                room_detail += str(span.text)
+                room_detail += '\n'
+
             room_detail += '\n'
 
-        room_detail += '\n'
+        db_room_infos[i] = room_detail[:-2]
 
-    room_details.append(room_detail)
+except Exception as err:
+    print()
+    print(err)
 
-print()
-for room_detail in room_details:
-    print(room_detail)
+finally:
+    print()
+    print(db_summary)
+    print()
+    for db_room_info in db_room_infos:
+        print(db_room_info)
+
 
 '''
 방 lat, lng 가져오기
 '''
 time.sleep(1)
+
 script_tag = soup.select_one("script[data-state=true]")
 lat_start_idx = script_tag.text.find('"lat"') + len('"lat":')
 lng_start_idx = script_tag.text.find('"lng"') + len('"lng":')
@@ -137,26 +186,72 @@ db_lat = script_tag.text[lat_start_idx:lat_start_idx+11].split(',')[0]
 db_lng = script_tag.text[lng_start_idx:lng_start_idx+13].split(',')[0]
 
 if db_lat == 'null':
-    print('lat, lng should be parsed')
+    google_map_src = soup.select_one("._1fmyluo4 > img")['src']
+    cut_word_from = 'center='
+    cut_word_to = '&scale'
+    cut_index_from = google_map_src.find(cut_word_from) + len(cut_word_from)
+    cut_index_to = google_map_src.find(cut_word_to)
+
+    latlng = google_map_src[cut_index_from:cut_index_to]
+    db_lat = latlng.split(',')[0]
+    db_lng = latlng.split(',')[1]
+    print('lat: {}, lng: {}'.format(db_lat, db_lng))
 else:
     print()
     print('lat: {}, lng: {}'.format(db_lat, db_lng))
 
-
-# google_map_tag = soup.select_one("._1fmyluo4")
-# print(google_map_tag.prettify())
-
-# google_map_src = soup.select_one("._1fmyluo4 > img")['src']
-# cut_word_from = 'center='
-# cut_word_to = '&scale'
-# cut_index_from = google_map_src.find(cut_word_from) + len(cut_word_from)
-# cut_index_to = google_map_src.find(cut_word_to)
-
-# latlng = google_map_src[cut_index_from:cut_index_to]
-# db_lat = latlng.split(',')[0]
-# db_lng = latlng.split(',')[1]
-
 browser.implicitly_wait(3)
+
+#DB create
+
+# db_name
+# db_location
+
+# db_type
+# db_capacity
+# db_bedroom
+# db_bed
+# db_bathroom
+
+# db_summary
+# db_room_infos
+
+# db_lat
+# db_lng
+
+db_host = User.objects.get(username='admin')
+
+room = Room.objects.create(name=db_name,
+                           city=db_city,
+                           location=db_location,
+                           type=db_type,
+                           capacity=db_capacity,
+                           bedroom=db_bedroom,
+                           bathroom=db_bathroom,
+                           bed=db_bed,
+                           summary=db_summary,
+                           room_info_0=db_room_infos[0],
+                           room_info_1=db_room_infos[1],
+                           room_info_2=db_room_infos[2],
+                           room_info_3=db_room_infos[3],
+                           price=30000,
+                           host=db_host,
+                           lat=db_lat,
+                           lng=db_lng,
+                           )
+
+print('Room DB 저장 성공')
+
+count = 0
+for db_room_photo_url in db_room_photo_urls:
+    count += 1
+    img_data = requests.get(db_room_photo_url).content
+    ext = imghdr.what('', h=img_data)
+    db_room_photo = SimpleUploadedFile(f'{room_id}-{count}.{ext}', img_data)
+    RoomPhoto.objects.create(room=room, photo=db_room_photo)
+    # img_url = urllib.request.urlretrieve(db_room_photo, f'{room_id}-{count}.jpg')
+
+print('RoomPhoto DB 저장 성공')
 
 # 브라우저 종료
 browser.quit()

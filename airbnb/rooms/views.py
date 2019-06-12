@@ -17,7 +17,7 @@ class RoomsFilter(rest_framework.FilterSet):
 
     class Meta:
         model = Room
-        fields = ['id', 'city', 'location', 'capacity_cnt']
+        fields = ['id', 'city', 'location', 'capacity']
 
 
 class Rooms(generics.ListAPIView):

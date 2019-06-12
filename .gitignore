@@ -4,3 +4,4 @@ __pycache__
 *.pyc
 media/
 crawling/sample/
+crawling/roomss.txt

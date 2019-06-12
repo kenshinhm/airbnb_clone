@@ -17,7 +17,7 @@ class RoomAdmin(admin.ModelAdmin):
 
     list_filter = (
         'price',
-        'capacity_cnt',
+        'capacity',
     )
 
     list_display = (
@@ -27,7 +27,7 @@ class RoomAdmin(admin.ModelAdmin):
         'location',
         'name',
         'price',
-        'capacity_cnt',
+        'capacity',
 
     )
 

@@ -21,17 +21,17 @@ class Room(TimestampModel):
 
     # refactor
     type = models.CharField(max_length=20, blank=True, null=True)
-    capacity_cnt = models.IntegerField()
-    bedroom_cnt = models.IntegerField()
-    bathroom_cnt = models.IntegerField()
-    bed_cnt = models.IntegerField()
+    capacity = models.IntegerField()
+    bedroom = models.IntegerField()
+    bathroom = models.IntegerField()
+    bed = models.IntegerField()
 
     # refactor
-    detail_summary = models.TextField(blank=True)
-    detail_space = models.TextField(blank=True)
-    detail_guest_access = models.TextField(blank=True)
-    detail_guest_interaction = models.TextField(blank=True)
-    detail_others = models.TextField(blank=True)
+    summary = models.TextField(blank=True)
+    room_info_0 = models.TextField(blank=True)
+    room_info_1 = models.TextField(blank=True)
+    room_info_2 = models.TextField(blank=True)
+    room_info_3 = models.TextField(blank=True)
 
     price = models.IntegerField()
 
@@ -43,12 +43,10 @@ class Room(TimestampModel):
     # host
     # TODO: divide host user, guest user
     host = models.ForeignKey(User, on_delete=models.CASCADE)
-    is_super_host = models.BooleanField(blank=True)
 
     # room location
     lat = models.FloatField(blank=True, null=True)
     lng = models.FloatField(blank=True, null=True)
-    location_info = models.CharField(max_length=100, blank=True)
 
     @property
     def review_count(self):

@@ -59,26 +59,24 @@ class RoomSerializer(serializers.ModelSerializer):
                   'location',
 
                   'type',
-                  'capacity_cnt',
-                  'bedroom_cnt',
-                  'bathroom_cnt',
-                  'bed_cnt',
+                  'capacity',
+                  'bedroom',
+                  'bathroom',
+                  'bed',
 
-                  'detail_summary',
-                  'detail_space',
-                  'detail_guest_access',
-                  'detail_guest_interaction',
-                  'detail_others',
+                  'summary',
+                  'room_info_0',
+                  'room_info_1',
+                  'room_info_2',
+                  'room_info_3',
 
                   'price',
                   'rating',
 
                   'host',
-                  'is_super_host',
 
                   'lat',
                   'lng',
-                  'location_info',
 
                   'reviews',
                   'review_count',
