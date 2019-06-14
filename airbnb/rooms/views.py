@@ -1,3 +1,4 @@
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
 from rest_framework import generics
 from django_filters import rest_framework
@@ -25,10 +26,19 @@ class Rooms(generics.ListAPIView):
         returns list of rooms filtered by query fields.
         fields = ['id', 'city', 'location', 'capacity_cnt']
     """
-    queryset = Room.objects.all().prefetch_related('room_photos')
     serializer_class = RoomSerializer
     filter_backends = (rest_framework.DjangoFilterBackend,)
     filter_class = RoomsFilter
+
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = Room.objects.all().prefetch_related('room_photos').order_by('create_time')
+        # limit = int(self.request.query_params.get('limit', None))
+        # queryset = queryset.filter(purchaser__username=username)
+        return queryset
 
 
 class RoomDetail(APIView):

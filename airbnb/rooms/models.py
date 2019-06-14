@@ -16,11 +16,11 @@ class Room(TimestampModel):
 
     # room info
     name = models.CharField(max_length=100)
-    city = models.CharField(max_length=20)
-    location = models.CharField(max_length=20, null=True)
+    city = models.CharField(max_length=40)
+    location = models.CharField(max_length=40, null=True)
 
     # refactor
-    type = models.CharField(max_length=20, blank=True, null=True)
+    type = models.CharField(max_length=30, blank=True, null=True)
     capacity = models.IntegerField()
     bedroom = models.IntegerField()
     bathroom = models.IntegerField()
@@ -56,6 +56,8 @@ class Room(TimestampModel):
     def rating(self):
         rating_query = self.reviews.all().values('rating')
         rating_list = [query['rating'] for query in rating_query]
+        if not rating_list:
+            rating_list.append(0.0)
 
         return '{rating:.1f}'.format(rating=np.mean(rating_list))
 
