@@ -1,6 +1,6 @@
 import React from 'react';
-import 'components/Rooms/styles.scss';
-import styles from "components/Rooms/styles.scss";
+import 'components/shared/Rooms/styles.scss';
+import styles from "components/shared/Rooms/styles.scss";
 import {ReactComponent as Star} from 'svg/star.svg';
 import PropTypes from "prop-types";
 import withLoading from "components/shared/Loading/loading.js";
@@ -36,18 +36,19 @@ RoomCard.propTypes = {
         location: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
         price: PropTypes.number.isRequired,
-        rating: PropTypes.number,
+        rating: PropTypes.string,
     }).isRequired,
 };
 
-const Rooms = props => {
+const Presenter = props => {
 
     const rooms = props.rooms || [];
 
     return (
         <div className={styles.container}>
             {rooms.map(room => (
-                    <RoomCard key={room.id} room={room}/>
+                    <RoomCard key={room.id}
+                              room={room}/>
                 )
             )}
         </div>
@@ -55,7 +56,7 @@ const Rooms = props => {
 };
 
 
-Rooms.propTypes = {
+Presenter.propTypes = {
     rooms: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number.isRequired,
@@ -63,5 +64,5 @@ Rooms.propTypes = {
     ).isRequired,
 };
 
-export default withLoading(Rooms);
+export default withLoading(Presenter);
 

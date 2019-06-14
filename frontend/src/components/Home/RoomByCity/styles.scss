@@ -1,0 +1,23 @@
+@import "src/shared/variables";
+
+.container {
+    
+    .header {
+        color: $dark-grey;
+        font-size: $large-font-size;
+        font-weight: 800;
+        margin-top: 80px;
+        margin-bottom: 40px;
+    }
+    
+    .footer {
+        color: $warm-green;
+        font-weight: 600;
+        font-size: 17px;
+        line-height: 22px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        margin-top: 30px;
+    }
+}

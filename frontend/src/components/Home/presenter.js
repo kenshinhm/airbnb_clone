@@ -1,27 +1,12 @@
 import React from 'react';
 import styles from './styles.scss';
 import Recommendation from "components/Recommendation";
-import Rooms from "components/Rooms";
-import {ReactComponent as ArrowRight} from "svg/arrowRight.svg";
 import * as PropTypes from "prop-types";
 import Reservation from "components/Reservation";
+import RoomByCity from "components/Home/RoomByCity/container.js";
 
-const RoomContainer = ({title, city, dispatchLoading}) => {
-    return (
-        <div className={styles.roomContainer}>
-            <header className={styles.header}>{title}</header>
-            <Rooms city={city} limit={8} dispatchLoading={dispatchLoading}/>
-            <footer className={styles.footer}>
-                모두 보기(2,000개 이상)
-                <span style={{marginLeft: `10px`}}>
-                    <ArrowRight/>
-                </span>
-            </footer>
-        </div>
-    );
-};
 
-class App extends React.Component {
+class Presenter extends React.Component {
 
     static propTypes = {
         cityList: PropTypes.array,
@@ -49,10 +34,10 @@ class App extends React.Component {
                                     cityList={this.props.cityList}/>
                     {
                         this.props.renderCity.map((city, index) => (
-                            <RoomContainer key={index}
-                                           title={`${city}의 숙소`}
-                                           city={city}
-                                           dispatchLoading={this.props.dispatchLoading}/>
+                            <RoomByCity key={index}
+                                        title={`${city}의 숙소`}
+                                        city={city}
+                                        dispatchLoading={this.props.dispatchLoading}/>
                         ))
 
                     }
@@ -63,4 +48,5 @@ class App extends React.Component {
     }
 }
 
-export default App;
+
+export default Presenter;

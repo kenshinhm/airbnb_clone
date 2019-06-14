@@ -7,12 +7,13 @@ import superHostIcon from "img/superHostIcon.png";
 const Description = props => {
 
     const room = props.room;
-    const summary = room.detail_summary.split('\n');
-    const space = room.detail_space.split('\n');
-    const others = room.detail_others.split('\n');
-    const guest_access = room.detail_guest_access.split('\n');
-    const guest_interaction = room.detail_guest_interaction.split('\n');
-    const infos = [space, guest_access, guest_interaction, others];
+    // console.log(room);
+    const summary = room.summary.split('\n');
+    const room_info_0 = room.room_info_0.split('\n');
+    const room_info_1 = room.room_info_1.split('\n');
+    const room_info_2 = room.room_info_2.split('\n');
+    const room_info_3 = room.room_info_3.split('\n');
+    const infos = [room_info_0, room_info_1, room_info_2, room_info_3];
 
     return (
         <div className={styles.container}>
@@ -23,10 +24,10 @@ const Description = props => {
                         <span className={styles.text}>집 전체</span>
                     </div>
                     <div className={styles.summaryContent}>
-                        <span className={styles.text}>인원 {room.capacity_cnt}명</span>
-                        <span className={styles.text}>침실 {room.bedroom_cnt}개 </span>
-                        <span className={styles.text}>침대 {room.bed_cnt}개 </span>
-                        <span className={styles.text}>욕실 {room.bathroom_cnt}개 </span>
+                        <span className={styles.text}>인원 {room.capacity}명</span>
+                        <span className={styles.text}>침실 {room.bedroom}개 </span>
+                        <span className={styles.text}>침대 {room.bed}개 </span>
+                        <span className={styles.text}>욕실 {room.bathroom}개 </span>
                     </div>
                 </div>
                 {

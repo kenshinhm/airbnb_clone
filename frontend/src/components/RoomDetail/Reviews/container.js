@@ -17,7 +17,7 @@ class Reviews extends React.Component {
 
     static propTypes = {
         isLoggedIn: PropTypes.bool,
-        rating: PropTypes.number,
+        rating: PropTypes.string,
         reviews: PropTypes.array,
         reviewCount: PropTypes.number,
         roomId: PropTypes.number,
@@ -71,7 +71,7 @@ class Reviews extends React.Component {
 
         api.post(`rooms/${roomId}/reviews/`, data)
            .then(response => {
-               console.log(response);
+               // console.log(response);
                if (response.status === 201) {
                    this.props.getApi();
                } else {

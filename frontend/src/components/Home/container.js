@@ -1,9 +1,26 @@
 import React from 'react';
-import Home from "components/Home/presenter.js";
+import Presenter from "./presenter.js";
 import * as PropTypes from "prop-types";
+import {dispatchLoading, dispatchResize} from "redux/dom/actions.js";
+import {connect} from "react-redux";
 
 
-class Container extends React.Component {
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        dispatchResize: (width) => dispatch(dispatchResize(width)),
+        dispatchLoading: (status) => dispatch(dispatchLoading(status)),
+    };
+};
+
+const mapStateToProps = (state, ownProps) => {
+    const {dom: {loading}} = state;
+    return {
+        loading,
+    };
+};
+
+
+class Home extends React.Component {
 
     static propTypes = {
         dispatchResize: PropTypes.func.isRequired,
@@ -68,10 +85,11 @@ class Container extends React.Component {
 
     render() {
         return (
-            <Home {...this.props}
-                  {...this.state}/>
+            <Presenter {...this.props}
+                       {...this.state}/>
         );
     }
 }
 
-export default Container;
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

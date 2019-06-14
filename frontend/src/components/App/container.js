@@ -1,14 +1,15 @@
 import React from 'react';
-import App from './presenter';
+import Presenter from './presenter';
+import {connect} from "react-redux";
 
 
-class Container extends React.Component {
+class App extends React.Component {
 
     render() {
         return (
-            <App {...this.props}/>
+            <Presenter {...this.props}/>
         );
     }
 }
 
-export default Container;
+export default connect(null, null)(App);
