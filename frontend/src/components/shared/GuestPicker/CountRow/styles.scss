@@ -1,0 +1,14 @@
+@import "src/shared/variables";
+
+.count {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 120px;
+    
+    .count-button {
+        @include roundButton();
+        border: 1px solid rgb(0, 132, 137);
+        outline: none;
+    }
+}

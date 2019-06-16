@@ -1,0 +1,28 @@
+.guest-modal {
+    border-style: none;
+    background-color: white;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    top: 80px;
+    width: 300px;
+    padding: 0 10px;
+    
+    .guest-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        margin: 5px 0;
+    }
+    
+    .guest-button {
+        background: transparent;
+        border-style: none;
+        cursor: pointer;
+        color: #239499;
+        margin-left: auto;
+        height: 40px;
+    }
+}

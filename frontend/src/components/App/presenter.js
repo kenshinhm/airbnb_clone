@@ -11,13 +11,16 @@ class Presenter extends React.Component {
     render() {
         return (
             <div className={styles.app}>
-                <Navigation/>
-                <Switch>
-                    <Route exact path='/' component={Home}/>
-                    <Route path='/room/:id' component={RoomDetail}/>
-                    <Route path='/:city/rooms' component={RoomList}/>
-                </Switch>
-
+                <div className={styles.nav}>
+                    <Navigation/>
+                </div>
+                <div className={styles.body}>
+                    <Switch>
+                        <Route exact path='/' component={Home}/>
+                        <Route path='/room/:id' component={RoomDetail}/>
+                        <Route path='/:city/rooms' component={RoomList}/>
+                    </Switch>
+                </div>
             </div>
         );
     }

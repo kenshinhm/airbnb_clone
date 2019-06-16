@@ -1,9 +1,38 @@
+@import 'src/shared/variables';
+
 .container {
-    padding: 0 80px;
     width: 100%;
+    padding-left: 80px;
+    padding-right: 80px;
+    //position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    
+    .search-bar {
+        //width: 100%;
+        //height: fit-content;
+        padding: 10px 0;
+        position: sticky;
+        top: 80px;
+        width: 100%;
+        background-color: white;
+        
+        button {
+            margin-right: 10px;
+            @include boxBorder(no);
+            font-size: 12px;
+            color: rgb(96, 96, 96);
+            padding: 6px 12px;
+            cursor: pointer !important;
+            outline: none;
+            
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+        
+    }
     
     .title {
         font-weight: 800;
