@@ -47,7 +47,8 @@ const propTypes = forbidExtraProps({
     onOutsideClick: PropTypes.func,
     renderCalendarDay: PropTypes.func,
     renderDayContents: PropTypes.func,
-    // renderKeyboardShortcutsButton: PropTypes.func,
+    // renderKeyboardShortcutsButton: PropTypes.bool,
+    hideKeyboardShortcutsPanel: PropTypes.bool,
 
     // i18n
     monthFormat: PropTypes.string,
@@ -90,7 +91,8 @@ const defaultProps = {
     isRTL: false,
     renderMonthText: null,
     renderMonthElement: null,
-    // renderKeyboardShortcutsButton: null,
+    hideKeyboardShortcutsPanel: true,
+    // renderKeyboardShortcutsButton: false,
 
     // navigation related props
     navPrev: null,

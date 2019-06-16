@@ -7,6 +7,7 @@ class Room extends React.Component {
 
     static propTypes = {
         city: PropTypes.string.isRequired,
+        guestCount: PropTypes.number.isRequired,
         limit: PropTypes.number.isRequired,
         offset: PropTypes.number.isRequired,
         dispatchLoading: PropTypes.func.isRequired,
@@ -28,6 +29,7 @@ class Room extends React.Component {
 
         const params = new URLSearchParams();
         params.append('city', this.props.city);
+        params.append('capacity', this.props.guestCount.toString());
         params.append('limit', this.props.limit.toString());
         params.append('offset', this.props.offset.toString());
 

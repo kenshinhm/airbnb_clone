@@ -34,6 +34,14 @@ $phone-width: 510px;
     }
 }
 
+@mixin boxBorderAlmostWhite($radius) {
+    border: 1px solid $almost-white;
+    background-color: white;
+    @if $radius == yes {
+        border-radius: 3px;
+    }
+}
+
 @mixin borderBottom($thick) {
     border-bottom: $thick+px solid #dcdce6;
     background-color: white;

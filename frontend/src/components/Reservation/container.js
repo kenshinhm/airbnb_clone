@@ -32,7 +32,7 @@ class Container extends React.Component {
         evt.preventDefault();
         this.setState({
             ...this.state,
-            guestClicked: !this.state.guestClicked,
+            guestPickerClicked: !this.state.guestClicked,
         });
     };
 

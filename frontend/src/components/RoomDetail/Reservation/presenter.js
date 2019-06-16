@@ -39,10 +39,10 @@ const Presenter = props => {
                     <button className={styles.dropButton}
                             placeholder='인원' onClick={props.onClickGuestPicker}>
                         <span className={styles.placeholder}>{props.stringGuests}</span>
-                        {props.guestClicked ? <Arrowup/> : <ArrowDown/>}
+                        {props.guestPickerClicked ? <Arrowup/> : <ArrowDown/>}
                     </button>
                     {
-                        props.guestClicked ?
+                        props.guestPickerClicked ?
                             <GuestPicker onClick={props.onClickGuestPicker}
                                          onUpdate={props.onUpdateGuestPicker}/>
                             :
@@ -61,7 +61,7 @@ const Presenter = props => {
 };
 
 Presenter.propTypes = {
-    guestClicked: PropTypes.bool.isRequired,
+    guestPickerClicked: PropTypes.bool.isRequired,
     onClickGuestPicker: PropTypes.func.isRequired,
     onUpdateGuestPicker: PropTypes.func.isRequired,
     onDatesChange: PropTypes.func.isRequired,

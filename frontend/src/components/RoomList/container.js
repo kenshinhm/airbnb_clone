@@ -21,6 +21,9 @@ class RoomList extends React.Component {
 
     state = {
         city: '',
+        guestCount: 0,
+        startDate: '',
+        endDate: '',
         count: 0,
         limit: 20,
         offset: 0,
@@ -42,9 +45,32 @@ class RoomList extends React.Component {
         return (
             <Presenter {...this.props}
                        {...this.state}
-                       updateApi={this._updateApi}/>
+                       updateApi={this._updateApi}
+                       updateGuestCount={this._updateGuestCount}
+            />
         );
     }
+
+    _updateGuestCount = guestCount => {
+        // console.log(guestCount);
+        if (guestCount !== this.state.guestCount) {
+            this.setState({
+                guestCount
+            }, () => this._refresh());
+        }
+    };
+
+    _refresh = () => {
+        this.setState({
+            offset: -1,
+            count: 0,
+        }, () => {
+            setTimeout(() => this.setState({
+                offset: 0
+            }), 100);
+        });
+        window.scrollTo(0, 0);
+    };
 
     _updateApi = (data) => {
 

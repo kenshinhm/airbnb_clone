@@ -2,44 +2,23 @@
 
 .container {
     width: 100%;
-    padding-left: 80px;
-    padding-right: 80px;
-    //position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     
-    .search-bar {
-        //width: 100%;
-        //height: fit-content;
-        padding: 10px 0;
-        position: sticky;
-        top: 80px;
-        width: 100%;
-        background-color: white;
-        
-        button {
-            margin-right: 10px;
-            @include boxBorder(no);
-            font-size: 12px;
-            color: rgb(96, 96, 96);
-            padding: 6px 12px;
-            cursor: pointer !important;
-            outline: none;
-            
-            &:hover {
-                opacity: 0.7;
-            }
-        }
-        
-    }
-    
     .title {
+        width: 100%;
         font-weight: 800;
         font-size: 24px;
         line-height: 30px;
         letter-spacing: normal;
         color: rgb(72, 72, 72);
-        padding: 20px 0;
+        padding: 20px 80px;
+        margin-top: 50px;
+    }
+    
+    .body {
+        width: 100%;
+        padding: 0 80px;
     }
 }

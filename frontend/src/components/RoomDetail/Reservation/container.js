@@ -4,8 +4,7 @@ import Presenter from './presenter';
 class Reservation extends React.Component {
 
     state = {
-        guestClicked: false,
-
+        guestPickerClicked: false,
         stringGuests: "인원",
         guestCount: 0,
 
@@ -46,7 +45,7 @@ class Reservation extends React.Component {
         }
 
         this.setState({
-            guestClicked: !this.state.guestClicked,
+            guestPickerClicked: !this.state.guestPickerClicked,
         });
     };
 
