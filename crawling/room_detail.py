@@ -60,7 +60,7 @@ for city, urls in city_urls.items():
     print(city)
     print()
 
-    target_city = "인천광역시"
+    target_city = "울산광역시"
     if city != target_city:
         continue
 
@@ -140,7 +140,7 @@ for city, urls in city_urls.items():
                 "div._1p3joamp").text
 
             room_infos = soup.select_one("div#summary").next_sibling.select_one("div._hgs47m").select("div._czm8crp")
-            db_capacity = room_infos[0].text[-2] if isinstance(room_infos[0].text[-2], int) else 1
+            db_capacity = room_infos[0].text[-2]
             db_bedroom = 1 if room_infos[1].text == '원룸' else room_infos[1].text[-2]
             db_bed = room_infos[2].text[-2]
             db_bathroom = room_infos[3].text[-2]
