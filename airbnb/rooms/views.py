@@ -15,6 +15,7 @@ class RoomsFilter(rest_framework.FilterSet):
 
     city = rest_framework.CharFilter(lookup_expr='contains')
     location = rest_framework.CharFilter(lookup_expr='contains')
+    capacity = rest_framework.NumberFilter(lookup_expr='gte')
 
     class Meta:
         model = Room
