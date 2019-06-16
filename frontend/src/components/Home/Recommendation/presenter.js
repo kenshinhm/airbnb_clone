@@ -13,6 +13,7 @@ import kwangju from 'img/kwangju.jpg';
 import sokcho from 'img/sokcho.jpg';
 import suwon from 'img/suwon.jpg';
 import ulsan from 'img/ulsan.jpg';
+import {Link} from "react-router-dom";
 
 const cityList = {
     서울: seoul,
@@ -51,7 +52,7 @@ const _getCardStyle = (device) => {
     }
 };
 
-const Recommendation = props => {
+const Presenter = props => {
 
     const {cardStyle, cardNum} = _getCardStyle(props.device);
 
@@ -68,12 +69,14 @@ const Recommendation = props => {
                         {
                             props.cityList.map((city, index) => (
                                 <li key={index} className={cardStyle}>
-                                    <div style={{backgroundImage: `url(${cityList[city]})`}}
-                                         className={styles.img}>
-                                        <div className={styles.text}>
-                                            <p>{city}</p>
+                                    <Link to={`${city}/rooms`} style={{textDecoration: 'none'}}>
+                                        <div style={{backgroundImage: `url(${cityList[city]})`}}
+                                             className={styles.img}>
+                                            <div className={styles.text}>
+                                                <p>{city}</p>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </Link>
                                 </li>
                             ))
                         }
@@ -88,7 +91,7 @@ const Recommendation = props => {
     );
 };
 
-Recommendation.propTypes = {
+Presenter.propTypes = {
     title: PropTypes.string.isRequired,
     width: PropTypes.number.isRequired,
     device: PropTypes.string.isRequired,
@@ -99,5 +102,5 @@ Recommendation.propTypes = {
     slideRight: PropTypes.func.isRequired,
 };
 
-export default Recommendation;
+export default Presenter;
 

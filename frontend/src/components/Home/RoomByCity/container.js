@@ -11,13 +11,13 @@ class RoomByCity extends React.Component {
         return (
             <Presenter {...this.props}
                        {...this.state}
-                       updateCount={this._updateCount}/>
+                       updateApi={this._updateApi}/>
         );
     }
 
-    _updateCount = (count) => {
+    _updateApi = (data) => {
         this.setState({
-            count
+            count: data.count
         });
     };
 }

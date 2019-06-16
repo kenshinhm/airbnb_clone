@@ -1,8 +1,17 @@
 import React from 'react';
-import Recommendation from './presenter';
+import Presenter from './presenter.js';
 import * as PropTypes from "prop-types";
+import {connect} from 'react-redux';
 
-class Container extends React.Component {
+const mapStateToProps = (state, ownProps) => {
+    const {dom: {width, device}} = state;
+    return {
+        width,
+        device
+    };
+};
+
+class Recommendation extends React.Component {
 
     static propTypes = {
         title: PropTypes.string.isRequired,
@@ -18,10 +27,10 @@ class Container extends React.Component {
 
     render() {
         return (
-            <Recommendation {...this.props}
-                            {...this.state}
-                            slideLeft={this._slideLeft}
-                            slideRight={this._slideRight}/>
+            <Presenter {...this.props}
+                       {...this.state}
+                       slideLeft={this._slideLeft}
+                       slideRight={this._slideRight}/>
         );
     }
 
@@ -66,4 +75,4 @@ class Container extends React.Component {
     };
 }
 
-export default Container;
+export default connect(mapStateToProps, null)(Recommendation);

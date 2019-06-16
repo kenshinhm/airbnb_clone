@@ -8,8 +8,15 @@ class Room extends React.Component {
     static propTypes = {
         city: PropTypes.string.isRequired,
         limit: PropTypes.number.isRequired,
+        offset: PropTypes.number.isRequired,
         dispatchLoading: PropTypes.func.isRequired,
-        updateCount: PropTypes.func.isRequired,
+        updateApi: PropTypes.func,
+        width: PropTypes.number,
+    };
+
+    static defaultProps = {
+        offset: 0,
+        width: 4
     };
 
     state = {
@@ -22,16 +29,20 @@ class Room extends React.Component {
         const params = new URLSearchParams();
         params.append('city', this.props.city);
         params.append('limit', this.props.limit.toString());
-        params.append('offset', '0');
+        params.append('offset', this.props.offset.toString());
 
         api.get(`rooms/`, {params})
            .then(response => {
                if (response.status === 200) {
                    // console.log(response);
                    this.setState({
-                       rooms: [...response.data.results],
+                       rooms: this.state.rooms.concat(response.data.results),
                    });
-                   this.props.updateCount(response.data.count);
+
+                   if (this.props.updateApi) {
+                       this.props.updateApi(response.data);
+                   }
+
                    setTimeout(() => {
                        this.props.dispatchLoading(false);
                        this.setState({
@@ -48,7 +59,8 @@ class Room extends React.Component {
 
     render() {
         return (
-            <Presenter {...this.state}/>
+            <Presenter {...this.state}
+                       {...this.props}/>
         );
 
     }

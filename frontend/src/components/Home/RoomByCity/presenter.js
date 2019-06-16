@@ -3,6 +3,7 @@ import styles from './styles.scss';
 import Rooms from "components/shared/Rooms/container.js";
 import {ReactComponent as ArrowRight} from "svg/arrowRight.svg";
 import * as PropTypes from "prop-types";
+import {Link} from "react-router-dom";
 
 const Presenter = props => {
     return (
@@ -11,13 +12,15 @@ const Presenter = props => {
             <Rooms city={props.city}
                    limit={8}
                    dispatchLoading={props.dispatchLoading}
-                   updateCount={props.updateCount}/>
-            <footer className={styles.footer}>
-                {`모두 보기(${props.count}개 이상)`}
-                <span style={{marginLeft: `10px`}}>
+                   updateApi={props.updateApi}/>
+            <Link to={`${props.city}/rooms`} style={{textDecoration: 'none'}}>
+                <footer className={styles.footer}>
+                    {`모두 보기(${props.count}개 이상)`}
+                    <span style={{marginLeft: `10px`}}>
                     <ArrowRight/>
                 </span>
-            </footer>
+                </footer>
+            </Link>
         </div>
     );
 };
@@ -27,7 +30,7 @@ Presenter.propTypes = {
     city: PropTypes.string,
     dispatchLoading: PropTypes.func,
     count: PropTypes.number,
-    updateCount: PropTypes.func,
+    updateApi: PropTypes.func,
 };
 
 export default Presenter;

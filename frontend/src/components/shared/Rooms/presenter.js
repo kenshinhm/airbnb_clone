@@ -6,6 +6,12 @@ import PropTypes from "prop-types";
 import withLoading from "components/shared/Loading/loading.js";
 import {Link} from "react-router-dom";
 
+const cardWidth = (width) => {
+    return ({
+        width: `calc(${100.0 / width}% - 30px)`,
+    });
+};
+
 
 const RoomCard = props => {
 
@@ -13,8 +19,8 @@ const RoomCard = props => {
     const room_photo = room.room_photos[0].photo;
 
     return (
-        <div className={styles.card}>
-            <Link to={`room/${room.id}`}>
+        <div style={cardWidth(props.width)} className={styles.card}>
+            <Link to={`/room/${room.id}`}>
                 <div style={{backgroundImage: `url(${room_photo})`}}
                      className={styles.imgContainer}/>
             </Link>
@@ -48,7 +54,8 @@ const Presenter = props => {
         <div className={styles.container}>
             {rooms.map(room => (
                     <RoomCard key={room.id}
-                              room={room}/>
+                              room={room}
+                              width={props.width}/>
                 )
             )}
         </div>
@@ -62,6 +69,7 @@ Presenter.propTypes = {
             id: PropTypes.number.isRequired,
         })
     ).isRequired,
+    width: PropTypes.number,
 };
 
 export default withLoading(Presenter);
