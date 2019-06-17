@@ -10,7 +10,8 @@
     top: 80px;
     width: 295px;
     padding: 0 10px;
-    @include boxBorderAlmostWhite(yes);
+    //@include boxBorderAlmostWhite(yes);
+    @include boxBorder(yes);
     
     .guest-row {
         display: flex;

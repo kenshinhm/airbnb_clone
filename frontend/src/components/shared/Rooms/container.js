@@ -7,7 +7,7 @@ class Room extends React.Component {
 
     static propTypes = {
         city: PropTypes.string.isRequired,
-        guestCount: PropTypes.number.isRequired,
+        guestCount: PropTypes.number,
         limit: PropTypes.number.isRequired,
         offset: PropTypes.number.isRequired,
         dispatchLoading: PropTypes.func.isRequired,
@@ -17,7 +17,8 @@ class Room extends React.Component {
 
     static defaultProps = {
         offset: 0,
-        width: 4
+        width: 4,
+        guestCount: 0,
     };
 
     state = {

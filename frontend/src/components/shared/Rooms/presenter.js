@@ -16,6 +16,11 @@ const cardWidth = (width) => {
 const RoomCard = props => {
 
     const room = props.room;
+
+    if (!room.room_photos.length) {
+        console.log(room.id);
+    }
+
     const room_photo = room.room_photos[0].photo;
 
     return (
