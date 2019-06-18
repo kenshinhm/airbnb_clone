@@ -2,7 +2,6 @@
 
 .container {
     position: relative;
-    top: 25px;
     width: 350px;
     @include boxBorder(yes);
     display: flex;

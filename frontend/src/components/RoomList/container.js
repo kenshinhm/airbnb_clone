@@ -22,6 +22,8 @@ class RoomList extends React.Component {
     state = {
         city: '',
         guestCount: 0,
+        startPrice: 0,
+        endPrice: 200000,
         startDate: '',
         endDate: '',
         count: 0,
@@ -47,15 +49,27 @@ class RoomList extends React.Component {
                        {...this.state}
                        updateApi={this._updateApi}
                        updateGuestCount={this._updateGuestCount}
+                       updatePrice={this._updatePrice}
             />
         );
     }
 
     _updateGuestCount = guestCount => {
-        // console.log(guestCount);
+
         if (guestCount !== this.state.guestCount) {
             this.setState({
                 guestCount
+            }, () => this._refresh());
+        }
+    };
+
+    _updatePrice = (startPrice, endPrice) => {
+
+        if (startPrice !== this.state.startPrice
+            || endPrice !== this.state.endPrice) {
+            this.setState({
+                startPrice,
+                endPrice,
             }, () => this._refresh());
         }
     };

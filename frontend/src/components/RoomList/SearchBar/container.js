@@ -6,6 +6,7 @@ class SearchBar extends React.Component {
 
     static propTypes = {
         updateGuestCount: PropTypes.func.isRequired,
+        updatePrice: PropTypes.func.isRequired,
     };
 
     state = {
@@ -25,7 +26,7 @@ class SearchBar extends React.Component {
         pricePickerOn: false,
         stringPrice: "가격",
         startPrice: 0,
-        endPrice: 0,
+        endPrice: 200000,
     };
 
     //// DatePicker
@@ -124,7 +125,7 @@ class SearchBar extends React.Component {
                     pricePickerOn: true,
                 });
             }
-            // this.props.updatePrice(this.state.startPrice, this.state.endPrice);
+            this.props.updatePrice(this.state.startPrice, this.state.endPrice);
         } else {
             this.setState({
                 dayPickerClicked: false,
@@ -133,7 +134,7 @@ class SearchBar extends React.Component {
                 pricePickerOn: false,
                 stringPrice: "가격",
                 startPrice: 0,
-                endPrice: 0,
+                endPrice: 200000,
             });
         }
     };

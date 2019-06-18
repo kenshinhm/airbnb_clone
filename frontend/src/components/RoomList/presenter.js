@@ -15,6 +15,8 @@ const RoomsContainer = props => {
             <Rooms key={i}
                    city={props.city}
                    guestCount={props.guestCount}
+                   startPrice={props.startPrice}
+                   endPrice={props.endPrice}
                    limit={props.limit}
                    offset={props.limit * i}
                    dispatchLoading={props.dispatchLoading}
@@ -32,7 +34,8 @@ const Presenter = props => {
 
     return (
         <div className={styles.container}>
-            <SearchBar updateGuestCount={props.updateGuestCount}/>
+            <SearchBar updateGuestCount={props.updateGuestCount}
+                       updatePrice={props.updatePrice}/>
             <div className={styles.title}>
                 {`${props.city}, ${props.count}개의 숙소`}
             </div>
@@ -54,6 +57,7 @@ Presenter.propTypes = {
     dispatchLoading: PropTypes.func,
     updateApi: PropTypes.func,
     updateGuestCount: PropTypes.func,
+    updatePrice: PropTypes.func,
 };
 
 export default Presenter;

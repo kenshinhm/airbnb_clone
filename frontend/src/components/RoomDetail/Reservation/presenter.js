@@ -13,10 +13,11 @@ import GuestPicker from "components/shared/GuestPicker/container.js";
 const Presenter = props => {
 
     const position = props.sticky ? 'fixed' : 'relative';
+    const top = props.sticky ? '105px' : '25px';
 
     return (
         <div className={styles.container}
-             style={{position: position}}>
+             style={{position: position, top: top}}>
             <p>요금을 확인하려면 날짜를 입력하세요</p>
             <form className={styles.form}>
                 <div className={styles.formRow} style={{position: 'relative'}}>

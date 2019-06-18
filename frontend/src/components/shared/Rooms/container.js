@@ -8,6 +8,8 @@ class Room extends React.Component {
     static propTypes = {
         city: PropTypes.string.isRequired,
         guestCount: PropTypes.number,
+        startPrice: PropTypes.number,
+        endPrice: PropTypes.number,
         limit: PropTypes.number.isRequired,
         offset: PropTypes.number.isRequired,
         dispatchLoading: PropTypes.func.isRequired,
@@ -19,6 +21,8 @@ class Room extends React.Component {
         offset: 0,
         width: 4,
         guestCount: 0,
+        startPrice: 0,
+        endPrice: 200000,
     };
 
     state = {
@@ -31,6 +35,8 @@ class Room extends React.Component {
         const params = new URLSearchParams();
         params.append('city', this.props.city);
         params.append('capacity', this.props.guestCount.toString());
+        params.append('startPrice', this.props.startPrice.toString());
+        params.append('endPrice', this.props.endPrice.toString());
         params.append('limit', this.props.limit.toString());
         params.append('offset', this.props.offset.toString());
 

@@ -16,10 +16,12 @@ class RoomsFilter(rest_framework.FilterSet):
     city = rest_framework.CharFilter(lookup_expr='contains')
     location = rest_framework.CharFilter(lookup_expr='contains')
     capacity = rest_framework.NumberFilter(lookup_expr='gte')
+    startPrice = rest_framework.NumberFilter(field_name='price', lookup_expr='gte')
+    endPrice = rest_framework.NumberFilter(field_name='price', lookup_expr='lte')
 
     class Meta:
         model = Room
-        fields = ['id', 'city', 'location', 'capacity']
+        fields = ['id', 'city', 'location', 'capacity', 'startPrice', 'endPrice']
 
 
 class Rooms(generics.ListAPIView):
