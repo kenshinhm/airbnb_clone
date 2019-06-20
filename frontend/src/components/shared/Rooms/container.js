@@ -43,7 +43,7 @@ class Room extends React.Component {
         api.get(`rooms/`, {params})
            .then(response => {
                if (response.status === 200) {
-                   console.log(response);
+                   // console.log(response);
                    this.setState({
                        rooms: this.state.rooms.concat(response.data.results),
                    });
@@ -52,13 +52,11 @@ class Room extends React.Component {
                        this.props.updateApi(response.data);
                    }
 
-                   setTimeout(() => {
-                       this.props.dispatchLoading(false);
-                       this.setState({
-                           loading: false,
-                       });
+                   this.props.dispatchLoading(false);
+                   this.setState({
+                       loading: false,
+                   });
 
-                   }, 100);
                } else {
                    console.log(`${response.status}: ${response.statusText}`);
                }

@@ -29,6 +29,9 @@ class RoomList extends React.Component {
         count: 0,
         limit: 20,
         offset: 0,
+        average_price: 0,
+        average_rating: 0.0,
+        total_reviews: 0,
     };
 
     componentWillMount() {
@@ -92,6 +95,9 @@ class RoomList extends React.Component {
 
         this.setState({
             count: data.count,
+            average_price: data.average_price,
+            average_rating: data.average_rating,
+            total_reviews: data.total_reviews,
         });
         dispatchLoading(false);
     };

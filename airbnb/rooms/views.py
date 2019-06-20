@@ -73,13 +73,20 @@ class Rooms(generics.ListAPIView):
 
     def get_average_rating(self, rooms):
 
-        total_rooms = len(rooms)
+        total_rooms = 0
         total_rating = 0
 
         for room in rooms:
-            total_rating += float(room.rating)
+            rating = float(room.rating)
 
-        return round(total_rating / total_rooms, 2)
+            if rating > 0.0:
+                total_rating += rating
+                total_rooms += 1
+
+        if total_rooms == 0:
+            return 0.0
+        else:
+            return round(total_rating / total_rooms, 2)
 
     def get_total_reviews(self, rooms):
 
