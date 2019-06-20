@@ -39,9 +39,75 @@ class Rooms(generics.ListAPIView):
         by filtering against a `username` query parameter in the URL.
         """
         queryset = Room.objects.all().prefetch_related('room_photos').order_by('create_time')
-        # limit = int(self.request.query_params.get('limit', None))
         # queryset = queryset.filter(purchaser__username=username)
         return queryset
+
+    def list(self, request, *args, **kwargs):
+        # call the original 'list' to get the original response
+        response = super(Rooms, self).list(request, *args, **kwargs)
+
+        # customize the response data
+        city = self.request.query_params.get('city', None)
+        start_price = self.request.query_params.get('startPrice', None)
+        end_price = self.request.query_params.get('endPrice', None)
+        rooms = Room.objects.filter(city__icontains=city)
+        rooms = rooms.filter(price__gte=start_price)
+        rooms = rooms.filter(price__lte=end_price)
+
+        response.data['average_price'] = self.get_average_price(rooms)
+        response.data['average_rating'] = self.get_average_rating(rooms)
+        response.data['total_reviews'] = self.get_total_reviews(rooms)
+
+        # return response with this custom representation
+        return response
+
+    def get_average_price(self, rooms):
+
+        total_rooms = len(rooms)
+        total_price = 0
+
+        for room in rooms:
+            total_price += room.price
+
+        return int(total_price/total_rooms)
+
+    def get_average_rating(self, rooms):
+
+        total_rooms = len(rooms)
+        total_rating = 0
+
+        for room in rooms:
+            total_rating += float(room.rating)
+
+        return round(total_rating / total_rooms, 2)
+
+    def get_total_reviews(self, rooms):
+
+        total_review_count = 0
+
+        for room in rooms:
+            total_review_count += room.review_count
+
+        return total_review_count
+
+
+# class RoomsAverage(APIView):
+#
+#     def get(self, request):
+#
+#         city = request.query_params.get('city', None)
+#         startPrice = request.query_params.get('startPrice', None)
+#         endPrice = request.query_params.get('endPrice', None)
+#
+#         try:
+#             room = Room.objects.filter(city=city)
+#             # room = Room.objects.get(id=room_id)
+#         except Room.DoesNotExist:
+#             # return Response(status=status.HTTP_404_NOT_FOUND)
+#
+#         # serializer = RoomSerializer(room, context={"request": request})
+#
+#         return Response(status=status.HTTP_200_OK)
 
 
 class RoomDetail(APIView):

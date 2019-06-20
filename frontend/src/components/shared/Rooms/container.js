@@ -43,7 +43,7 @@ class Room extends React.Component {
         api.get(`rooms/`, {params})
            .then(response => {
                if (response.status === 200) {
-                   // console.log(response);
+                   console.log(response);
                    this.setState({
                        rooms: this.state.rooms.concat(response.data.results),
                    });
@@ -58,7 +58,7 @@ class Room extends React.Component {
                            loading: false,
                        });
 
-                   }, 500);
+                   }, 100);
                } else {
                    console.log(`${response.status}: ${response.statusText}`);
                }
