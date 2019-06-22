@@ -64,6 +64,8 @@ class Home extends React.Component {
         if (element.scrollHeight - element.scrollTop
             === element.clientHeight && !this.props.loading) {
 
+            // console.log('here');
+
             let nextCityIndex = this.state.nextCityIndex;
 
             if (nextCityIndex < this.state.cityList.length) {

@@ -98,25 +98,6 @@ class Rooms(generics.ListAPIView):
         return total_review_count
 
 
-# class RoomsAverage(APIView):
-#
-#     def get(self, request):
-#
-#         city = request.query_params.get('city', None)
-#         startPrice = request.query_params.get('startPrice', None)
-#         endPrice = request.query_params.get('endPrice', None)
-#
-#         try:
-#             room = Room.objects.filter(city=city)
-#             # room = Room.objects.get(id=room_id)
-#         except Room.DoesNotExist:
-#             # return Response(status=status.HTTP_404_NOT_FOUND)
-#
-#         # serializer = RoomSerializer(room, context={"request": request})
-#
-#         return Response(status=status.HTTP_200_OK)
-
-
 class RoomDetail(APIView):
 
     def get(self, request, room_id):
