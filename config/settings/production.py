@@ -7,7 +7,7 @@ SECRET_KEY = env(
     default="hLKwXQmw9JsheNR3lTrsNjoWPKNuVKmXfTw8iZM40jZ7UrFcZLsx3gtwBwj5Romc",
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "https://airbnb-clone-v1.herokuapp.com/", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "airbnb-clone-v1.herokuapp.com", "127.0.0.1"]
 
 # # GENERAL
 # # ------------------------------------------------------------------------------
