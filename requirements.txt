@@ -39,6 +39,7 @@ factory-boy==2.12.0
 fake-useragent==0.1.11
 Faker==1.0.7
 flake8==3.7.7
+gunicorn==19.9.0
 idna==2.8
 imagesize==1.1.0
 ipdb==0.12
@@ -106,5 +107,6 @@ uritemplate==3.0.0
 urllib3==1.25.3
 wcwidth==0.1.7
 Werkzeug==0.14.1
+whitenoise==4.1.2
 wrapt==1.11.1
 XlsxWriter==1.1.8
