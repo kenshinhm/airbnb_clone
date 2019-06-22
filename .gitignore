@@ -2,9 +2,8 @@
 env/
 __pycache__
 *.pyc
-media/
+airbnb/media/
 crawling/sample/
 crawling/rooms.txt
 crawling/rooms_100.txt
 crawling/rooms_300.txt
-static/
