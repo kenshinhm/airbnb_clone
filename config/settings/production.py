@@ -1,5 +1,6 @@
 from .base import *  # noqa
 from .base import env
+import django_heroku
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env(
@@ -8,6 +9,8 @@ SECRET_KEY = env(
 )
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["localhost", "airbnb-clone-v1.herokuapp.com", "127.0.0.1"]
+
+django_heroku.settings(locals())
 
 # # GENERAL
 # # ------------------------------------------------------------------------------
