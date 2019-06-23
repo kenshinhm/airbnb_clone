@@ -4,7 +4,7 @@ import os
 import pickle
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
 django.setup()
 
 from airbnb.rooms.models import Room, RoomPhoto
@@ -20,7 +20,7 @@ with open('rooms.pkl', 'rb') as f_rooms:
         # DB create
         db_host = User.objects.get(username='admin')
 
-        room = rooms_pickle[0]
+        room = rooms_pickle.get(id=930)
         photos = room_photos_pickle.filter(room__id=room.id)
 
         rm = Room.objects.create(name=room.name,
@@ -43,7 +43,7 @@ with open('rooms.pkl', 'rb') as f_rooms:
                                  )
 
         for photo in photos:
-            RoomPhoto.objects.create(room=rm, photo=photo)
+            RoomPhoto.objects.create(room=rm, photo=photo.photo)
 
         print('Room DB Finish')
 
