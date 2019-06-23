@@ -3,10 +3,7 @@ from .base import env
 import django_heroku
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
-SECRET_KEY = env(
-    "DJANGO_SECRET_KEY",
-    default="hLKwXQmw9JsheNR3lTrsNjoWPKNuVKmXfTw8iZM40jZ7UrFcZLsx3gtwBwj5Romc",
-)
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["localhost", "airbnb-clone-v1.herokuapp.com", "127.0.0.1"]
 
@@ -22,7 +19,7 @@ ALLOWED_HOSTS = ["localhost", "airbnb-clone-v1.herokuapp.com", "127.0.0.1"]
 #
 # # DATABASES
 # # ------------------------------------------------------------------------------
-# DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
+DATABASES["default"] = env.db("DATABASE_URL")  # noqa F405
 # DATABASES["default"]["ATOMIC_REQUESTS"] = True  # noqa F405
 # DATABASES["default"]["CONN_MAX_AGE"] = env.int("CONN_MAX_AGE", default=60)  # noqa F405
 #
