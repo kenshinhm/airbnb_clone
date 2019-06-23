@@ -36,5 +36,5 @@ with open('rooms.pkl', 'rb') as f:
                         lng=room.lng,
                         )
 
-    print('Room DB 저장 성공')
+    print('Room DB Finish')
 
