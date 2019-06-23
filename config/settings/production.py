@@ -130,16 +130,18 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 # Use the Heroku-style specification
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env('RDS_DB_NAME'),
-        'USER': env('RDS_DB_USERNAME'),
-        'PASSWORD': env('RDS_DB_PASSWORD'),
-        'HOST': env('RDS_DB_HOSTNAME'),
-        'PORT': env('RDS_DB_PORT'),
-    }
-}
+# DATABASES['default'] = env.db('DATABASE_URL')
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env('RDS_DB_NAME'),
+#         'USER': env('RDS_DB_USERNAME'),
+#         'PASSWORD': env('RDS_DB_PASSWORD'),
+#         'HOST': env('RDS_DB_HOSTNAME'),
+#         'PORT': env('RDS_DB_PORT'),
+#     }
+# }
 
 # CACHING
 # ------------------------------------------------------------------------------
@@ -209,7 +211,7 @@ LOGGING = {
 }
 
 # Custom Admin URL, use {% url 'admin:index' %}
-# ADMIN_URL = env('DJANGO_ADMIN_URL')
+ADMIN_URL = env('DJANGO_ADMIN_URL')
 
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
