@@ -43,9 +43,9 @@ LOCALE_PATHS = [ROOT_DIR.path("locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres:///airbnb")
-}
+# DATABASES = {
+#     "default": env.db("DATABASE_URL", default="postgres:///airbnb")
+# }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # URLS
