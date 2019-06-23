@@ -69,7 +69,10 @@ class Rooms(generics.ListAPIView):
         for room in rooms:
             total_price += room.price
 
-        return int(total_price/total_rooms)
+        if total_rooms == 0:
+            return 0
+        else:
+            return int(total_price/total_rooms)
 
     def get_average_rating(self, rooms):
 
