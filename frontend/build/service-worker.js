@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "http://airbnb-clone.ap-northeast-2.elasticbeanstalk.com/precache-manifest.60a1896c7b8be5f20f83dafc39cd4e67.js"
+  "https://airbnb-clone-yjh.s3.amazonaws.com/precache-manifest.d2e0a92fd52fec9e5df6012a9853f167.js"
 );
 
 self.addEventListener('message', (event) => {
@@ -33,7 +33,7 @@ workbox.core.clientsClaim();
 self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("http://airbnb-clone.ap-northeast-2.elasticbeanstalk.com/index.html"), {
+workbox.routing.registerNavigationRoute(workbox.precaching.getCacheKeyForURL("https://airbnb-clone-yjh.s3.amazonaws.com/index.html"), {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });

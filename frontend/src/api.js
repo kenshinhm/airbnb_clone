@@ -5,9 +5,9 @@ const env = process.env.NODE_ENV;
 let url = null;
 
 if (env === 'development') {
-    url = process.env.REACT_APP_API_URL;
+    url = process.env.REACT_APP_API_DEV;
 } else {
-    url = process.env.PUBLIC_URL;
+    url = process.env.REACT_APP_API_DEP;
 }
 const api = axios.create({
     baseURL: url
