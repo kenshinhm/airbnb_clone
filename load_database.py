@@ -14,7 +14,7 @@ with open('rooms.pkl', 'rb') as f:
     rooms = pickle.load(f)
 
     # DB create
-    # db_host = User.objects.get(username='admin')
+    db_host = User.objects.get(username='admin')
 
     room = rooms[0]
     Room.objects.create(name=room.name,
