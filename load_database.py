@@ -20,7 +20,7 @@ with open('rooms.pkl', 'rb') as f_rooms:
         # DB create
         db_host = User.objects.get(username='admin')
 
-        room = rooms_pickle.filter(city='서울특별시')[0]
+        room = rooms_pickle[0]
         photos = room_photos_pickle.filter(room__id=room.id)
 
         rm = Room.objects.create(name=room.name,
