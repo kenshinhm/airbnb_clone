@@ -8,22 +8,15 @@ class ReactAppView(View):
 
     def get(self, request):
 
-        return HttpResponse(
-            """
-            index.html is not found ! build your React App !
-            """,
-            status=501
-        )
+        try:
+            with open(os.path.join(str(settings.ROOT_DIR), 'frontend', 'build', 'index.html')) as file:
+                return HttpResponse(file.read())
 
-        # try:
-        #     with open(os.path.join(str(settings.ROOT_DIR), 'frontend', 'build', 'index.html')) as file:
-        #         return HttpResponse(file.read())
-        #
-        # except Exception as err:
-        #     print(err)
-        #     return HttpResponse(
-        #         """
-        #         index.html is not found ! build your React App !
-        #         """,
-        #         status=501
-        #     )
+        except Exception as err:
+            print(err)
+            return HttpResponse(
+                """
+                index.html is not found ! build your React App !
+                """,
+                status=501
+            )
