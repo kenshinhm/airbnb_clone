@@ -3,11 +3,8 @@ Base settings to build other settings files upon.
 """
 
 import environ
-import os
 
-ROOT_DIR = (
-    environ.Path(__file__) - 3
-)  # (airbnb/config/settings/base.py - 3 = airbnb/)
+ROOT_DIR = (environ.Path(__file__) - 3)  # (airbnb/config/settings/base.py - 3 = airbnb/)
 APPS_DIR = ROOT_DIR.path("airbnb")
 
 env = environ.Env()
@@ -43,9 +40,9 @@ LOCALE_PATHS = [ROOT_DIR.path("locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
-# DATABASES = {
-#     "default": env.db("DATABASE_URL", default="postgres:///airbnb")
-# }
+DATABASES = {
+    "default": env.db("DATABASE_URL", default="postgres:///airbnb")
+}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # URLS
@@ -137,7 +134,7 @@ MIDDLEWARE = [
     "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     'corsheaders.middleware.CorsMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -147,21 +144,21 @@ MIDDLEWARE = [
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = str(ROOT_DIR.path("staticfiles"))
+STATIC_ROOT = str(ROOT_DIR("staticfiles"))
 
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-url
 STATIC_URL = "/static/"
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
 STATICFILES_DIRS = [
     # os.path.join(ROOT_DIR, 'static'),
     #os.path.join(APPS_DIR, 'static'),
     str(ROOT_DIR.path("frontend", "build", "static")),
-    str(ROOT_DIR.path("frontend", "build")),
+    # str(ROOT_DIR.path("frontend", "build")),
 ]
 # https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#staticfiles-finders
 STATICFILES_FINDERS = [
