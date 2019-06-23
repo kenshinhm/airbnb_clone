@@ -31,7 +31,7 @@ with open('rooms.pkl', 'rb') as f:
                         room_info_2=room.room_info_2,
                         room_info_3=room.room_info_3,
                         price=room.price,
-                        host=room.host,
+                        host=db_host,
                         lat=room.lat,
                         lng=room.lng,
                         )
