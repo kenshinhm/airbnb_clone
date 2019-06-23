@@ -4,8 +4,8 @@ import os
 import pickle
 from django.core.files.uploadedfile import SimpleUploadedFile
 
-# os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.local")
-# django.setup()
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
+django.setup()
 
 from airbnb.rooms.models import Room
 from airbnb.users.models import User
