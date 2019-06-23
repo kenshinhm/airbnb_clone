@@ -1,8 +1,16 @@
 import axios from 'axios';
 
+const env = process.env.NODE_ENV;
+
+let url = null;
+
+if (env === 'development') {
+    url = process.env.REACT_APP_API_URL;
+} else {
+    url = process.env.PUBLIC_URL;
+}
 const api = axios.create({
-    baseURL: process.env.REACT_APP_API_URL,
-    // baseURL: 'https://backends.xyz/',
+    baseURL: url
 });
 
 api.interceptors.request.use(function (config) {
