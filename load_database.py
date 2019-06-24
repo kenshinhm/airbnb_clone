@@ -2,7 +2,7 @@
 import django
 import os
 import pickle
-from django.core.files.uploadedfile import SimpleUploadedFile
+# from django.core.files.uploadedfile import SimpleUploadedFile
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings.production")
 django.setup()
@@ -44,19 +44,14 @@ with open('room_photos.pkl', 'rb') as f_room_photos:
 
     room_photos_pickle = pickle.load(f_room_photos)
 
-    # for photo in room_photos_pickle:
-    #
-    #     room = Room.objects.filter(name=photo.room.name)
+    for photo in room_photos_pickle:
 
-        # if len(room) > 1:
-        #     print(photo.room.name)
+        try:
+            room = Room.objects.get(name=photo.room.name, price=photo.room.price)
+            RoomPhoto.objects.create(room=room, photo=photo.photo)
+        except Room.DoesNotExist:
+            print('pass the room')
 
-        # RoomPhoto.objects.create(room=room, photo=photo.photo)
-
-        # for photo in room_photos_pickle:
-        #     print(photo)
-        # RoomPhoto.objects.create(room=rm, photo=photo.photo)
-
-
+    print('finished')
 
 
