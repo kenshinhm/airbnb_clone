@@ -16,12 +16,13 @@ const cardWidth = (width) => {
 const RoomCard = props => {
 
     const room = props.room;
+    let room_photo = null;
 
     if (!room.room_photos.length) {
         console.log(room.id);
+    } else {
+        room_photo = room.room_photos[0].photo;
     }
-
-    const room_photo = room.room_photos[0].photo;
 
     return (
         <div style={cardWidth(props.width)} className={styles.card}>

@@ -41,6 +41,11 @@ class RoomPhotoAdmin(admin.ModelAdmin):
         'photo',
     )
 
+    search_fields = (
+        'id',
+        'room',
+    )
+
 
 @admin.register(Amenity)
 class AmenityAdmin(admin.ModelAdmin):
