@@ -11,3 +11,4 @@ crawling/rooms_300.txt
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+aws-ec2.pem

@@ -13,6 +13,7 @@ class RoomAdmin(admin.ModelAdmin):
     search_fields = (
         'city',
         'location',
+        'name',
     )
 
     list_filter = (

@@ -44,14 +44,19 @@ with open('room_photos.pkl', 'rb') as f_room_photos:
 
     room_photos_pickle = pickle.load(f_room_photos)
 
-    photo = room_photos_pickle[2500]
-
-    room = Room.objects.get(name=photo.room.name)
-
-    RoomPhoto.objects.create(room=room, photo=photo.photo)
-
     # for photo in room_photos_pickle:
-    #     print(photo)
+    #
+    #     room = Room.objects.filter(name=photo.room.name)
+
+        # if len(room) > 1:
+        #     print(photo.room.name)
+
+        # RoomPhoto.objects.create(room=room, photo=photo.photo)
+
+        # for photo in room_photos_pickle:
+        #     print(photo)
         # RoomPhoto.objects.create(room=rm, photo=photo.photo)
+
+
 
 
