@@ -12,7 +12,7 @@ from .base import *  # noqa
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Raises ImproperlyConfigured exception if DJANGO_SECRET_KEY not in os.environ
-DEBUG = True
+DEBUG = False
 SECRET_KEY = env('DJANGO_SECRET_KEY')
 
 
@@ -43,7 +43,8 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 # ------------------------------------------------------------------------------
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost",
+                 "airbnb-clone.ap-northeast-2.elasticbeanstalk.com"]
 # END SITE CONFIGURATION
 
 INSTALLED_APPS += ['gunicorn', ]
@@ -217,3 +218,31 @@ LOGGING = {
 # Your production stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
 AWS_DEFAULT_ACL = None
+
+# CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ALLOW_CREDENTIALS = True
+#
+# CORS_ALLOW_METHODS = ('GET', 'PUT', 'POST', 'DELETE')
+
+# CORS_ORIGIN_WHITELIST = ['http://airbnb-clone.ap-northeast-2.elasticbeanstalk.com/']
+#
+# def get_linux_ec2_private_ip():
+#     """Get the private IP Address of the machine if running on an EC2 linux server"""
+#     from urllib.request import urlopen
+#     if not is_ec2_linux():
+#         return None
+#     try:
+#         response = urlopen('http://169.254.169.254/latest/meta-data/local-ipv4')
+#         ec2_ip = response.read().decode('utf-8')
+#         if response:
+#             response.close()
+#         return ec2_ip
+#     except Exception as e:
+#         print(e)
+#         return None
+#
+#
+# private_ip = get_linux_ec2_private_ip()
+# if private_ip:
+#     ALLOWED_HOSTS.append(private_ip)
