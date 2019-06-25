@@ -44,7 +44,8 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = ["localhost",
-                 "airbnb-clone.ap-northeast-2.elasticbeanstalk.com"]
+                 "airbnb-clone.ap-northeast-2.elasticbeanstalk.com",
+                 "airbnbclone.netlify.com"]
 # END SITE CONFIGURATION
 
 INSTALLED_APPS += ['gunicorn', ]
@@ -221,7 +222,7 @@ AWS_DEFAULT_ACL = None
 
 # CORS_ORIGIN_ALLOW_ALL = False
 
-CORS_ALLOW_CREDENTIALS = True
+# CORS_ALLOW_CREDENTIALS = True
 #
 # CORS_ALLOW_METHODS = ('GET', 'PUT', 'POST', 'DELETE')
 
