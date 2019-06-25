@@ -300,6 +300,16 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_ALLOW_ALL = True
 
+CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = ('GET', 'PUT', 'POST', 'DELETE')
+
+CORS_ORIGIN_WHITELIST = (
+    'localhost:3000',
+    'localhost:8000',
+    'http://airbnb-clone.ap-northeast-2.elasticbeanstalk.com/'
+)
+
 ACCOUNT_LOGOUT_ON_GET = True
 
 REST_USE_JWT = True
