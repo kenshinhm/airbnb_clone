@@ -43,9 +43,7 @@ SECRET_KEY = env('DJANGO_SECRET_KEY')
 # ------------------------------------------------------------------------------
 # Hosts/domain names that are valid for this site
 # See https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost",
-                 "airbnb-clone.ap-northeast-2.elasticbeanstalk.com",
-                 "airbnbclone.netlify.com"]
+ALLOWED_HOSTS = ["*"]
 # END SITE CONFIGURATION
 
 INSTALLED_APPS += ['gunicorn', ]
