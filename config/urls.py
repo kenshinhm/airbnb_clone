@@ -19,7 +19,7 @@ urlpatterns = [
     # path('api-token-auth/', obtain_jwt_token),
     # Your stuff: custom urls includes go here
     path("rooms/", include("airbnb.rooms.urls", namespace="rooms")),
-    re_path("", views.ReactAppView.as_view()),
+    # re_path("", views.ReactAppView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
