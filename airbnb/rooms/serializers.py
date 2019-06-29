@@ -18,7 +18,8 @@ class ReviewSerializer(serializers.ModelSerializer):
             'message',
             'room',
             'rating',
-            'is_own'
+            'is_own',
+            'create_time',
         )
 
     def get_is_own(self, obj):
