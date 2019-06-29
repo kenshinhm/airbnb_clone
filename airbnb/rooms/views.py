@@ -5,6 +5,7 @@ from django_filters import rest_framework
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
+from django.db.models import Q
 
 from airbnb.rooms.serializers import RoomSerializer, ReviewSerializer
 from .models import Room, Review
@@ -13,15 +14,13 @@ from .models import Room, Review
 
 class RoomsFilter(rest_framework.FilterSet):
 
-    city = rest_framework.CharFilter(lookup_expr='contains')
-    location = rest_framework.CharFilter(lookup_expr='contains')
     capacity = rest_framework.NumberFilter(lookup_expr='gte')
     startPrice = rest_framework.NumberFilter(field_name='price', lookup_expr='gte')
     endPrice = rest_framework.NumberFilter(field_name='price', lookup_expr='lte')
 
     class Meta:
         model = Room
-        fields = ['id', 'city', 'location', 'capacity', 'startPrice', 'endPrice']
+        fields = ['id', 'capacity', 'startPrice', 'endPrice']
 
 
 class Rooms(generics.ListAPIView):
@@ -39,7 +38,8 @@ class Rooms(generics.ListAPIView):
         by filtering against a `username` query parameter in the URL.
         """
         queryset = Room.objects.all().prefetch_related('room_photos').order_by('create_time')
-        # queryset = queryset.filter(purchaser__username=username)
+        query = self.request.query_params.get('query', None)
+        queryset = queryset.filter(city__icontains=query) | Room.objects.filter(location__icontains=query)
         return queryset
 
     def list(self, request, *args, **kwargs):
@@ -47,10 +47,10 @@ class Rooms(generics.ListAPIView):
         response = super(Rooms, self).list(request, *args, **kwargs)
 
         # customize the response data
-        city = self.request.query_params.get('city', None)
+        query = self.request.query_params.get('query', None)
         start_price = self.request.query_params.get('startPrice', None)
         end_price = self.request.query_params.get('endPrice', None)
-        rooms = Room.objects.filter(city__icontains=city)
+        rooms = Room.objects.filter(city__icontains=query) | Room.objects.filter(location__icontains=query)
         rooms = rooms.filter(price__gte=start_price)
         rooms = rooms.filter(price__lte=end_price)
 
