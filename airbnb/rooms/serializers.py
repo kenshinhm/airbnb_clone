@@ -4,10 +4,21 @@ from airbnb.rooms.models import Room, RoomPhoto, Review, Reservation
 from airbnb.users.serializers import UserSerializer
 
 
+class RoomIdNameLocationPriceSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Room
+        fields = ('id',
+                  'name',
+                  'location',
+                  'price',
+                  )
+
+
 class ReservationSerializer(serializers.ModelSerializer):
 
     creator = UserSerializer(read_only=True)
-    room = serializers.StringRelatedField()
+    room = RoomIdNameLocationPriceSerializer(read_only=True)
 
     class Meta:
         model = Reservation
