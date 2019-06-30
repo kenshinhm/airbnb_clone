@@ -1,7 +1,24 @@
 from rest_framework import serializers
 
-from airbnb.rooms.models import Room, RoomPhoto, Review
+from airbnb.rooms.models import Room, RoomPhoto, Review, Reservation
 from airbnb.users.serializers import UserSerializer
+
+
+class ReservationSerializer(serializers.ModelSerializer):
+
+    creator = UserSerializer(read_only=True)
+    room = serializers.StringRelatedField()
+
+    class Meta:
+        model = Reservation
+        fields = (
+            'id',
+            'creator',
+            'room',
+            'start_date',
+            'end_date',
+            'guest_count',
+        )
 
 
 class ReviewSerializer(serializers.ModelSerializer):
@@ -49,6 +66,7 @@ class RoomSerializer(serializers.ModelSerializer):
     # reviews = serializers.ListField(read_only=True, child=ReviewSerializer())
     reviews = ReviewSerializer(many=True)
     room_photos = RoomPhotoSerializer(many=True)
+    reservations = ReservationSerializer(many=True)
     host = UserSerializer(read_only=True)
     rating = serializers.ReadOnlyField()
 
@@ -85,4 +103,5 @@ class RoomSerializer(serializers.ModelSerializer):
                   # relation
                   # 'amenity',
                   'room_photos',
+                  'reservations',
                   )

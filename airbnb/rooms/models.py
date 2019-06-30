@@ -94,3 +94,15 @@ class RoomPhoto(TimestampModel):
         return self.room.name
 
 
+class Reservation(TimestampModel):
+
+    room = models.ForeignKey(Room, on_delete=models.CASCADE, related_name='reservations')
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField()
+    guest_count = models.IntegerField()
+
+    def __str__(self):
+        return '{},{}-{}'.format(self.room, self.start_date, self.end_date)
+
+

@@ -1,7 +1,6 @@
 from django.contrib import admin
 
-from airbnb.rooms.models import Room, RoomPhoto, Amenity, Review
-
+from airbnb.rooms.models import Room, RoomPhoto, Amenity, Review, Reservation
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
@@ -63,4 +62,16 @@ class ReviewAdmin(admin.ModelAdmin):
         'creator',
         'message',
         'rating',
+    )
+
+
+@admin.register(Reservation)
+class ReservationAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'room',
+        'creator',
+        'start_date',
+        'end_date',
+        'guest_count',
     )

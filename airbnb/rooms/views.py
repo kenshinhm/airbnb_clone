@@ -1,14 +1,13 @@
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
+# from rest_framework.pagination import PageNumberPagination
+# from rest_framework.permissions import IsAuthenticated, BasePermission, SAFE_METHODS
 from rest_framework import generics
 from django_filters import rest_framework
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
-from django.db.models import Q
 
-from airbnb.rooms.serializers import RoomSerializer, ReviewSerializer
-from .models import Room, Review
+from airbnb.rooms.serializers import RoomSerializer, ReviewSerializer, ReservationSerializer
+from .models import Room, Review, Reservation
 # from django.shortcuts import render
 
 
@@ -170,4 +169,34 @@ class RoomReview(APIView):
 
         except Review.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+class RoomReservation(APIView):
+
+    def post(self, request, room_id):
+
+        user = request.user
+
+        try:
+            room = Room.objects.get(id=room_id)
+        except Room.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        serializer = ReservationSerializer(data=request.data)
+
+        if serializer.is_valid():
+            serializer.save(creator=user, room=room)
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(data=serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, _, room_id):
+
+        try:
+            reservation = Reservation.objects.get(room__id=room_id)
+            serializer = ReservationSerializer(reservation)
+        except Review.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
